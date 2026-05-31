@@ -31,6 +31,10 @@ import {
   Wrench,
   X,
   Layers3,
+  Code2,
+  ExternalLink,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 const profile = {
@@ -51,6 +55,7 @@ const nav = [
   { label: "Accueil", id: "home" },
   { label: "Valeur", id: "value" },
   { label: "Veille", id: "future" },
+  { label: "Réalisations", id: "projects" },
   { label: "Expérience", id: "experience" },
   { label: "Stack", id: "stack" },
   { label: "Contact", id: "contact" },
@@ -196,6 +201,50 @@ const experiences = [
       "Rédaction de procédures support et documentation utilisateur.",
     ],
     stack: ["Ticketing", "Applications métiers", "Tests", "Recette", "SQL", "Excel", "Documentation"],
+  },
+];
+
+
+const projects = [
+  {
+    title: "My App Todo",
+    type: "Application desktop",
+    stack: "C# · WinForms · SQLite",
+    icon: Code2,
+    gradient: "from-indigo-700 via-blue-700 to-slate-950",
+    description: "Application de gestion de tâches avec stockage local, interface simple et suivi des actions utilisateur.",
+    points: ["CRUD tâches", "Base SQLite", "Interface WinForms", "Organisation personnelle"],
+    link: "#",
+  },
+  {
+    title: "Site vitrine",
+    type: "Front-end",
+    stack: "React · JavaScript",
+    icon: MonitorCog,
+    gradient: "from-cyan-600 via-blue-600 to-indigo-800",
+    description: "Site vitrine moderne avec composants React, navigation fluide et mise en page responsive.",
+    points: ["Responsive", "Composants React", "UX claire", "Design moderne"],
+    link: "#",
+  },
+  {
+    title: "ArtSphere",
+    type: "Application web",
+    stack: "React · Firebase",
+    icon: Sparkles,
+    gradient: "from-fuchsia-600 via-violet-700 to-slate-950",
+    description: "Projet web orienté contenu avec authentification, stockage Firebase et interface interactive.",
+    points: ["Firebase", "Authentification", "Contenu dynamique", "Interface interactive"],
+    link: "#",
+  },
+  {
+    title: "Gestionnaire des tâches",
+    type: "Application web",
+    stack: "PHP Laravel · MariaDB · MySQL",
+    icon: ClipboardList,
+    gradient: "from-red-600 via-orange-600 to-slate-950",
+    description: "Application de suivi des tâches avec gestion des données, logique back-end et base relationnelle.",
+    points: ["Laravel", "MariaDB", "MySQL", "Gestion utilisateurs"],
+    link: "#",
   },
 ];
 
@@ -726,6 +775,144 @@ function FutureSupportSection() {
   );
 }
 
+
+function ProjectsSection() {
+  const [active, setActive] = useState(0);
+  const current = projects[active];
+  const CurrentIcon = current.icon;
+
+  const previous = () => setActive((index) => (index === 0 ? projects.length - 1 : index - 1));
+  const next = () => setActive((index) => (index === projects.length - 1 ? 0 : index + 1));
+
+  return (
+    <section id="projects" className="relative overflow-hidden bg-white px-5 py-20 dark:bg-slate-950">
+      <motion.div
+        animate={{ x: [0, 25, 0], y: [0, -20, 0] }}
+        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute left-0 top-20 h-96 w-96 rounded-full bg-blue-200 opacity-40 blur-3xl dark:bg-blue-700 dark:opacity-20"
+      />
+      <motion.div
+        animate={{ x: [0, -30, 0], y: [0, 20, 0] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-fuchsia-200 opacity-40 blur-3xl dark:bg-fuchsia-700 dark:opacity-20"
+      />
+
+      <div className="relative mx-auto max-w-7xl">
+        <SectionHeader
+          eyebrow="Réalisations"
+          title="Mes réalisations techniques"
+          subtitle="Quelques projets qui montrent ma logique applicative, ma rigueur et ma capacité à construire des interfaces utiles."
+          icon={Code2}
+        />
+
+        <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+          <div className="grid gap-4">
+            {projects.map((project, index) => {
+              const Icon = project.icon;
+              const isActive = active === index;
+
+              return (
+                <motion.button
+                  key={project.title}
+                  onClick={() => setActive(index)}
+                  whileHover={{ x: 6 }}
+                  whileTap={{ scale: 0.98 }}
+                  className={`group rounded-[1.75rem] p-5 text-left transition ${
+                    isActive
+                      ? "bg-slate-950 text-white shadow-2xl shadow-slate-200 dark:bg-white dark:text-slate-950 dark:shadow-none"
+                      : "bg-slate-50 text-slate-800 ring-1 ring-slate-200 hover:bg-blue-50 hover:text-blue-800 dark:bg-white/5 dark:text-slate-200 dark:ring-white/10 dark:hover:bg-white/10 dark:hover:text-cyan-200"
+                  }`}
+                >
+                  <div className="flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-4">
+                      <span className={`grid h-14 w-14 place-items-center rounded-2xl ${
+                        isActive
+                          ? "bg-white/12 text-cyan-200 dark:bg-slate-950 dark:text-cyan-300"
+                          : "bg-white text-blue-700 ring-1 ring-slate-200 dark:bg-white/10 dark:text-cyan-200 dark:ring-white/10"
+                      }`}>
+                        <Icon className="h-6 w-6" />
+                      </span>
+                      <span>
+                        <span className="block text-lg font-black">{project.title}</span>
+                        <span className={`text-xs font-black uppercase tracking-wide ${
+                          isActive ? "text-cyan-200 dark:text-blue-700" : "text-slate-500 dark:text-slate-400"
+                        }`}>
+                          {project.type}
+                        </span>
+                      </span>
+                    </div>
+                    <ArrowRight className="h-5 w-5 transition group-hover:translate-x-1" />
+                  </div>
+                </motion.button>
+              );
+            })}
+          </div>
+
+          <AnimatePresence mode="wait">
+            <motion.article
+              key={current.title}
+              initial={{ opacity: 0, x: 24, scale: 0.98 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              exit={{ opacity: 0, x: -24, scale: 0.98 }}
+              transition={{ duration: 0.35 }}
+              className="overflow-hidden rounded-[2.5rem] border border-slate-200 bg-white shadow-2xl shadow-slate-100 dark:border-white/10 dark:bg-white/10 dark:shadow-black/20"
+            >
+              <div className={`relative min-h-[260px] bg-gradient-to-br ${current.gradient} p-7 text-white`}>
+                <div className="absolute right-8 top-8 opacity-20">
+                  <CurrentIcon className="h-40 w-40" />
+                </div>
+
+                <div className="relative flex h-full min-h-[220px] flex-col justify-between">
+                  <div>
+                    <span className="rounded-full bg-white/16 px-4 py-2 text-xs font-black ring-1 ring-white/20">
+                      {current.type}
+                    </span>
+                    <h3 className="mt-6 text-4xl font-black tracking-tight">{current.title}</h3>
+                    <p className="mt-2 text-lg font-black text-white/85">{current.stack}</p>
+                  </div>
+
+                  <div className="mt-8 flex items-center gap-3">
+                    <button onClick={previous} className="grid h-11 w-11 place-items-center rounded-full bg-white/14 ring-1 ring-white/20 transition hover:bg-white/25" aria-label="Projet précédent">
+                      <ChevronLeft className="h-5 w-5" />
+                    </button>
+                    <button onClick={next} className="grid h-11 w-11 place-items-center rounded-full bg-white/14 ring-1 ring-white/20 transition hover:bg-white/25" aria-label="Projet suivant">
+                      <ChevronRight className="h-5 w-5" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-6 md:p-8">
+                <p className="font-semibold leading-8 text-slate-600 dark:text-slate-300">{current.description}</p>
+                <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                  {current.points.map((point) => (
+                    <div key={point} className="flex items-center gap-3 rounded-2xl bg-slate-50 px-4 py-3 text-sm font-black text-slate-700 ring-1 ring-slate-100 dark:bg-slate-950/60 dark:text-slate-200 dark:ring-white/10">
+                      <CheckCircle2 className="h-5 w-5 shrink-0 text-blue-700 dark:text-cyan-300" />
+                      {point}
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-7 flex items-center justify-between gap-4">
+                  <div className="flex gap-2">
+                    {projects.map((project, index) => (
+                      <button key={project.title} onClick={() => setActive(index)} className={`h-2.5 rounded-full transition ${active === index ? "w-8 bg-blue-700 dark:bg-cyan-300" : "w-2.5 bg-slate-300 dark:bg-white/30"}`} aria-label={`Voir ${project.title}`} />
+                    ))}
+                  </div>
+
+                  <a href={current.link} className="inline-flex items-center gap-2 rounded-full bg-slate-950 px-5 py-3 text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-blue-700 dark:bg-white dark:text-slate-950 dark:hover:bg-cyan-100">
+                    Voir plus <ExternalLink className="h-4 w-4" />
+                  </a>
+                </div>
+              </div>
+            </motion.article>
+          </AnimatePresence>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ExperienceSection() {
   const [open, setOpen] = useState(0);
   return (
@@ -934,6 +1121,7 @@ export default function App() {
         <Hero theme={theme} toggleTheme={toggleTheme} />
         <ValueSection />
         <FutureSupportSection />
+        <ProjectsSection />
         <ExperienceSection />
         <StackSection />
         <EducationStrip />
