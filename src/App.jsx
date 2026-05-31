@@ -35,6 +35,9 @@ import {
   ExternalLink,
   ChevronLeft,
   ChevronRight,
+  Github,
+  BookOpen,
+  Rocket,
 } from "lucide-react";
 
 const profile = {
@@ -56,6 +59,7 @@ const nav = [
   { label: "Valeur", id: "value" },
   { label: "Veille", id: "future" },
   { label: "Réalisations", id: "projects" },
+  { label: "Projets", id: "projects" },
   { label: "Expérience", id: "experience" },
   { label: "Stack", id: "stack" },
   { label: "Contact", id: "contact" },
@@ -212,9 +216,33 @@ const projects = [
     stack: "C# · WinForms · SQLite",
     icon: Code2,
     gradient: "from-indigo-700 via-blue-700 to-slate-950",
-    description: "Application de gestion de tâches avec stockage local, interface simple et suivi des actions utilisateur.",
-    points: ["CRUD tâches", "Base SQLite", "Interface WinForms", "Organisation personnelle"],
-    link: "#",
+    description:
+      "Application simple et efficace de gestion de tâches permettant aux utilisateurs de créer, modifier, supprimer et suivre des tâches avec priorités et échéances.",
+    intro:
+      "My App Todo est une application de gestion de tâches conçue pour mieux organiser le travail quotidien. Elle propose une interface intuitive pour créer, mettre à jour et supprimer des tâches, avec définition des priorités, statuts et dates.",
+    screenshots: [
+      { label: "Interface principale", src: "/projects/todo-main.png" },
+      { label: "Fenêtre d’ajout de tâche", src: "/projects/todo-add.png" },
+    ],
+    features: [
+      "Création, modification et suppression de tâches",
+      "Gestion des statuts : en cours, terminé, suspendu",
+      "Priorités et dates de début / fin",
+      "Stockage local avec SQLite",
+      "Interface WinForms simple et lisible",
+    ],
+    tech: [".NET Framework", "C#", "WinForms", "SQLite", "NLog", "xUnit"],
+    prerequisites: [".NET Framework", "Bibliothèque SQLite pour .NET", "Bibliothèque NLog", "xUnit pour les tests"],
+    deployment: [
+      "git clone https://github.com/samaholicc/TaskManagerFinal.git",
+      "cd TaskManagerFinal",
+      "dotnet restore",
+      "dotnet build",
+      "dotnet run",
+    ],
+    docsLabel: "Télécharger la documentation",
+    docsLink: "#",
+    github: "https://github.com/samaholicc/TaskManagerFinal",
   },
   {
     title: "Site vitrine",
@@ -222,9 +250,33 @@ const projects = [
     stack: "React · JavaScript",
     icon: MonitorCog,
     gradient: "from-cyan-600 via-blue-600 to-indigo-800",
-    description: "Site vitrine moderne avec composants React, navigation fluide et mise en page responsive.",
-    points: ["Responsive", "Composants React", "UX claire", "Design moderne"],
-    link: "#",
+    description:
+      "Site web moderne en React présentant une page d’accueil, un portfolio, une section contact et des animations fluides.",
+    intro:
+      "Projet de site vitrine conçu pour présenter une activité, des services et des réalisations avec une interface claire, responsive et dynamique.",
+    screenshots: [
+      { label: "Section accueil", src: "/projects/site-home.png" },
+      { label: "Section portfolio", src: "/projects/site-portfolio.png" },
+      { label: "Section contact", src: "/projects/site-contact.png" },
+    ],
+    features: [
+      "Page d’accueil claire et professionnelle",
+      "Section portfolio avec cartes projets",
+      "Formulaire de contact",
+      "Animations avec Framer Motion",
+      "Interface responsive",
+    ],
+    tech: ["React", "JavaScript", "EmailJS", "Framer Motion", "CSS responsive"],
+    prerequisites: ["Node.js", "npm", "Navigateur moderne"],
+    deployment: [
+      "npm install",
+      "npm run dev",
+      "npm run build",
+      "npm start",
+    ],
+    docsLabel: "Télécharger la documentation",
+    docsLink: "#",
+    github: "#",
   },
   {
     title: "ArtSphere",
@@ -232,19 +284,84 @@ const projects = [
     stack: "React · Firebase",
     icon: Sparkles,
     gradient: "from-fuchsia-600 via-violet-700 to-slate-950",
-    description: "Projet web orienté contenu avec authentification, stockage Firebase et interface interactive.",
-    points: ["Firebase", "Authentification", "Contenu dynamique", "Interface interactive"],
-    link: "#",
+    description:
+      "Plateforme web permettant de créer, partager et découvrir des dessins avec authentification, galerie et interactions sociales.",
+    intro:
+      "ArtSphere est une plateforme web pour les artistes, leur permettant de dessiner, partager leurs œuvres, consulter une galerie et interagir avec d’autres utilisateurs.",
+    screenshots: [
+      { label: "Éditeur de dessin", src: "/projects/artsphere-editor.png" },
+      { label: "Galerie", src: "/projects/artsphere-gallery.png" },
+      { label: "Profil utilisateur", src: "/projects/artsphere-profile.png" },
+    ],
+    features: [
+      "Éditeur de dessin interactif",
+      "Galerie publique des créations",
+      "Profil utilisateur personnalisé",
+      "Authentification Firebase",
+      "Interface responsive",
+    ],
+    tech: ["React", "Vite", "Firebase Authentication", "Firestore", "Firebase Storage", "Tailwind CSS", "Framer Motion"],
+    prerequisites: ["Node.js 18+", "Compte Firebase", "Firebase CLI"],
+    deployment: [
+      "git clone https://github.com/samaholicc/artsphere.git",
+      "cd artsphere",
+      "npm install",
+      "cd functions",
+      "npm install",
+      "cd ..",
+      "firebase deploy --only functions",
+      "npm run build",
+      "firebase deploy --only hosting",
+    ],
+    docsLabel: "Télécharger la documentation",
+    docsLink: "#",
+    github: "#",
   },
   {
     title: "Gestionnaire des tâches",
     type: "Application web",
-    stack: "PHP Laravel · MariaDB · MySQL",
+    stack: "Laravel · PHP · MySQL · Blade",
     icon: ClipboardList,
-    gradient: "from-red-600 via-orange-600 to-slate-950",
-    description: "Application de suivi des tâches avec gestion des données, logique back-end et base relationnelle.",
-    points: ["Laravel", "MariaDB", "MySQL", "Gestion utilisateurs"],
-    link: "#",
+    gradient: "from-blue-700 via-indigo-700 to-slate-950",
+    description:
+      "Application web Laravel de gestion de tâches avec tableau de bord, création, modification, suppression et organisation du travail.",
+    intro:
+      "Le Gestionnaire des tâches est une application web développée avec le framework Laravel. Elle permet de créer, modifier, suivre et supprimer des tâches depuis une interface simple. L’architecture MVC de Laravel apporte une structure claire, organisée et maintenable.",
+    screenshots: [
+      { label: "Tableau de bord", src: "/projects/task-dashboard.png" },
+      { label: "Créer une tâche", src: "/projects/task-create.png" },
+      { label: "Mes tâches", src: "/projects/task-list.png" },
+      { label: "Réinitialisation du mot de passe", src: "/projects/task-reset-password.png" },
+    ],
+    features: [
+      "Créer des tâches : définir une tâche, une description et une priorité.",
+      "Modifier des tâches : ajuster les informations en fonction des changements.",
+      "Voir toutes les tâches : accéder à une liste claire pour mieux suivre l’avancement.",
+      "Supprimer des tâches : retirer les tâches terminées ou non pertinentes.",
+    ],
+    laravelFeatures: [
+      "Eloquent ORM : simplifie les interactions avec la base de données.",
+      "Routing : facilite la définition des URLs et leur logique correspondante.",
+      "Blade Template Engine : permet des vues propres et réutilisables.",
+      "Middleware : sécurise l’application et protège les routes sensibles.",
+    ],
+    tech: ["Laravel", "PHP", "Blade", "MySQL", "MariaDB", "Composer", "MVC", "Eloquent ORM"],
+    prerequisites: ["PHP 8+", "Composer", "MySQL ou MariaDB", "Node.js / npm"],
+    deployment: [
+      "git clone https://github.com/samaholicc/task_manager.git",
+      "cd task_manager",
+      "composer install",
+      "cp .env.example .env",
+      "php artisan key:generate",
+      "php artisan migrate",
+    ],
+    usage: [
+      "php artisan serve",
+      "Ouvrir l’application sur http://localhost:8000",
+    ],
+    docsLabel: "Télécharger la documentation",
+    docsLink: "#",
+    github: "https://github.com/samaholicc/task_manager",
   },
 ];
 
@@ -778,6 +895,7 @@ function FutureSupportSection() {
 
 function ProjectsSection() {
   const [active, setActive] = useState(0);
+  const [selectedProject, setSelectedProject] = useState(null);
   const current = projects[active];
   const CurrentIcon = current.icon;
 
@@ -801,7 +919,7 @@ function ProjectsSection() {
         <SectionHeader
           eyebrow="Réalisations"
           title="Mes réalisations techniques"
-          subtitle="Quelques projets qui montrent ma logique applicative, ma rigueur et ma capacité à construire des interfaces utiles."
+          subtitle="Quelques projets qui montrent ma logique applicative, ma rigueur et ma capacité à documenter un projet."
           icon={Code2}
         />
 
@@ -884,8 +1002,9 @@ function ProjectsSection() {
 
               <div className="p-6 md:p-8">
                 <p className="font-semibold leading-8 text-slate-600 dark:text-slate-300">{current.description}</p>
+
                 <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                  {current.points.map((point) => (
+                  {current.points?.map((point) => (
                     <div key={point} className="flex items-center gap-3 rounded-2xl bg-slate-50 px-4 py-3 text-sm font-black text-slate-700 ring-1 ring-slate-100 dark:bg-slate-950/60 dark:text-slate-200 dark:ring-white/10">
                       <CheckCircle2 className="h-5 w-5 shrink-0 text-blue-700 dark:text-cyan-300" />
                       {point}
@@ -900,16 +1019,195 @@ function ProjectsSection() {
                     ))}
                   </div>
 
-                  <a href={current.link} className="inline-flex items-center gap-2 rounded-full bg-slate-950 px-5 py-3 text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-blue-700 dark:bg-white dark:text-slate-950 dark:hover:bg-cyan-100">
+                  <button
+                    onClick={() => setSelectedProject(current)}
+                    className="inline-flex items-center gap-2 rounded-full bg-slate-950 px-5 py-3 text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-blue-700 dark:bg-white dark:text-slate-950 dark:hover:bg-cyan-100"
+                  >
                     Voir plus <ExternalLink className="h-4 w-4" />
-                  </a>
+                  </button>
                 </div>
               </div>
             </motion.article>
           </AnimatePresence>
         </div>
       </div>
+
+      <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
     </section>
+  );
+}
+
+function ProjectModal({ project, onClose }) {
+  if (!project) return null;
+  const ProjectIcon = project.icon;
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        className="fixed inset-0 z-[100] overflow-y-auto bg-slate-950/80 px-4 py-6 backdrop-blur-md"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
+        <div className="mx-auto max-w-6xl">
+          <motion.article
+            initial={{ opacity: 0, y: 28, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 28, scale: 0.98 }}
+            className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-slate-900 text-white shadow-2xl"
+          >
+            <button
+              onClick={onClose}
+              className="absolute right-5 top-5 z-10 grid h-11 w-11 place-items-center rounded-full bg-white/10 text-white ring-1 ring-white/15 transition hover:bg-white/20"
+              aria-label="Fermer"
+            >
+              <X className="h-6 w-6" />
+            </button>
+
+            <div className={`bg-gradient-to-br ${project.gradient} px-6 py-10 text-center md:px-12`}>
+              <div className="mx-auto grid h-16 w-16 place-items-center rounded-3xl bg-white/16 ring-1 ring-white/20">
+                <ProjectIcon className="h-8 w-8" />
+              </div>
+              <h2 className="mt-5 text-4xl font-black tracking-tight">{project.title}</h2>
+              <p className="mt-2 text-lg font-black text-white/80">{project.stack}</p>
+            </div>
+
+            <div className="space-y-10 px-6 py-8 md:px-12">
+              <section className="text-center">
+                <h3 className="text-2xl font-black">Introduction</h3>
+                <p className="mx-auto mt-4 max-w-4xl text-lg font-semibold leading-9 text-slate-300">
+                  {project.intro}
+                </p>
+              </section>
+
+              <div className="h-px bg-white/10" />
+
+              <section>
+                <h3 className="text-center text-2xl font-black">Captures d’écran</h3>
+                <div className="mt-6 grid gap-6 md:grid-cols-2">
+                  {project.screenshots.map((screen) => (
+                    <figure key={screen.label} className="rounded-3xl bg-white/5 p-4 ring-1 ring-white/10">
+                      <div className="grid aspect-video place-items-center overflow-hidden rounded-2xl bg-slate-800">
+                        <img
+                          src={screen.src}
+                          alt={screen.label}
+                          className="h-full w-full object-cover"
+                          onError={(event) => {
+                            event.currentTarget.style.display = "none";
+                            event.currentTarget.parentElement.innerHTML = "<div class='px-6 text-center text-sm font-black text-slate-400'>Ajoute l’image dans public/projects</div>";
+                          }}
+                        />
+                      </div>
+                      <figcaption className="mt-3 text-center text-sm font-black text-slate-300">{screen.label}</figcaption>
+                    </figure>
+                  ))}
+                </div>
+              </section>
+
+              <div className="h-px bg-white/10" />
+
+              {project.laravelFeatures && (
+                <section>
+                  <h3 className="text-center text-2xl font-black">Fonctionnalités de Laravel utilisées</h3>
+                  <div className="mt-6 grid gap-3 md:grid-cols-2">
+                    {project.laravelFeatures.map((item) => (
+                      <div key={item} className="flex items-center gap-3 rounded-2xl bg-white/5 px-4 py-3 font-bold text-slate-200 ring-1 ring-white/10">
+                        <Rocket className="h-5 w-5 shrink-0 text-amber-300" />
+                        {item}
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              <section>
+                <h3 className="text-center text-2xl font-black">Fonctionnalités de l’application</h3>
+                <div className="mt-6 grid gap-3 md:grid-cols-2">
+                  {project.features.map((item) => (
+                    <div key={item} className="flex items-center gap-3 rounded-2xl bg-white/5 px-4 py-3 font-bold text-slate-200 ring-1 ring-white/10">
+                      <CheckCircle2 className="h-5 w-5 shrink-0 text-cyan-300" />
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              <section className="rounded-[2rem] bg-white/5 p-6 ring-1 ring-white/10">
+                <h3 className="text-center text-2xl font-black">Technologies utilisées</h3>
+                <div className="mt-5 flex flex-wrap justify-center gap-2">
+                  {project.tech.map((item) => (
+                    <span key={item} className="rounded-full bg-slate-950 px-4 py-2 text-sm font-black text-cyan-200 ring-1 ring-white/10">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </section>
+
+              <section>
+                <h3 className="text-center text-2xl font-black">Prérequis</h3>
+                <div className="mx-auto mt-5 grid max-w-3xl gap-3">
+                  {project.prerequisites.map((item) => (
+                    <div key={item} className="rounded-2xl bg-white/5 px-4 py-3 text-center font-bold text-slate-300 ring-1 ring-white/10">
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              <div className="h-px bg-white/10" />
+
+              <section>
+                <h3 className="text-center text-2xl font-black">Déploiement</h3>
+                <p className="mt-3 text-center font-semibold text-slate-300">Suivez ces étapes pour lancer ou déployer le projet :</p>
+                <div className="mx-auto mt-6 grid max-w-4xl gap-4">
+                  {project.deployment.map((step, index) => (
+                    <div key={`${step}-${index}`} className="grid gap-3 rounded-2xl bg-white/5 p-4 ring-1 ring-white/10 md:grid-cols-[3rem_1fr] md:items-center">
+                      <span className="grid h-10 w-10 place-items-center rounded-full bg-blue-600 text-sm font-black text-white">{index + 1}</span>
+                      <code className="overflow-x-auto rounded-xl bg-slate-950 px-4 py-3 text-sm font-black text-emerald-300">
+                        {step}
+                      </code>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              {project.usage && (
+                <section className="rounded-[2rem] bg-white/5 p-6 ring-1 ring-white/10">
+                  <h3 className="text-center text-2xl font-black">Utilisation</h3>
+                  <p className="mt-3 text-center font-semibold text-slate-300">Pour démarrer le serveur local :</p>
+                  <div className="mx-auto mt-5 grid max-w-3xl gap-3">
+                    {project.usage.map((step) => (
+                      <code key={step} className="overflow-x-auto rounded-xl bg-slate-950 px-4 py-3 text-center text-sm font-black text-emerald-300">
+                        {step}
+                      </code>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              <div className="flex flex-col justify-center gap-3 pb-2 sm:flex-row">
+                <a
+                  href={project.docsLink}
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 px-7 py-4 font-black text-white transition hover:-translate-y-0.5 hover:bg-blue-500"
+                >
+                  <BookOpen className="h-5 w-5" />
+                  {project.docsLabel}
+                </a>
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-white/15 px-7 py-4 font-black text-white ring-1 ring-white/15 transition hover:-translate-y-0.5 hover:bg-white/25"
+                >
+                  <Github className="h-5 w-5" />
+                  Voir sur GitHub
+                </a>
+              </div>
+            </div>
+          </motion.article>
+        </div>
+      </motion.div>
+    </AnimatePresence>
   );
 }
 
