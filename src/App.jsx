@@ -657,7 +657,7 @@ function Navbar({ theme, toggleTheme }) {
 
         <div className="hidden items-center gap-1 rounded-full border border-slate-200 bg-white/80 p-1 shadow-sm dark:border-white/10 dark:bg-white/5 lg:flex">
           {nav.map((item) => (
-            <button key={item.id} onClick={() => scrollTo(item.id)} className="rounded-full px-3 py-2 text-xs font-black text-slate-600 transition hover:bg-blue-50 hover:text-blue-800 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-cyan-200 xl:px-4 xl:text-sm">
+            <button key={item.id} onClick={() => scrollTo(item.id)} className="rounded-full px-3 py-2 text-xs font-black text-slate-600 transition duration-300 ease-out hover:bg-blue-50 hover:text-blue-800 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-cyan-200 xl:px-4 xl:text-sm">
               {item.label}
             </button>
           ))}
@@ -665,10 +665,10 @@ function Navbar({ theme, toggleTheme }) {
 
         <div className="hidden items-center gap-3 sm:flex">
           <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
-          <a href={profile.cv} download className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-black text-slate-800 shadow-sm transition hover:-translate-y-0.5 hover:text-blue-700 dark:border-white/10 dark:bg-white/10 dark:text-white dark:hover:text-cyan-200">
+          <a href={profile.cv} download className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-black text-slate-800 shadow-sm transition duration-300 ease-out hover:-translate-y-0.5 hover:text-blue-700 dark:border-white/10 dark:bg-white/10 dark:text-white dark:hover:text-cyan-200">
             CV <Download className="h-4 w-4" />
           </a>
-          <a href={`mailto:${profile.email}`} className="inline-flex items-center gap-2 rounded-full bg-slate-950 px-5 py-3 text-sm font-black text-white shadow-xl shadow-slate-200 transition hover:-translate-y-0.5 hover:bg-blue-700 dark:bg-white dark:text-slate-950 dark:shadow-none dark:hover:bg-cyan-100">
+          <a href={`mailto:${profile.email}`} className="inline-flex items-center gap-2 rounded-full bg-slate-950 px-5 py-3 text-sm font-black text-white shadow-xl shadow-slate-200 transition duration-300 ease-out hover:-translate-y-0.5 hover:bg-blue-700 dark:bg-white dark:text-slate-950 dark:shadow-none dark:hover:bg-cyan-100">
             Contact <ArrowRight className="h-4 w-4" />
           </a>
         </div>
@@ -736,13 +736,13 @@ function Hero({ theme, toggleTheme }) {
           <p className="mt-6 max-w-2xl text-xl font-semibold leading-9 text-slate-600 dark:text-slate-300">{profile.pitch}</p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a href={`mailto:${profile.email}`} className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blue-700 to-fuchsia-600 px-7 py-4 font-black text-white shadow-xl shadow-blue-200 transition hover:-translate-y-1 dark:shadow-blue-950/30">
+            <a href={`mailto:${profile.email}`} className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blue-700 to-fuchsia-600 px-7 py-4 font-black text-white shadow-xl shadow-blue-200 transition duration-300 ease-out hover:-translate-y-1 dark:shadow-blue-950/30">
               Me contacter <Mail className="h-5 w-5" />
             </a>
-            <button onClick={() => scrollTo("future")} className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-7 py-4 font-black text-slate-900 shadow-xl shadow-slate-100 transition hover:-translate-y-1 hover:text-blue-800 dark:border-white/10 dark:bg-white/10 dark:text-white dark:shadow-none dark:hover:bg-white/15 dark:hover:text-cyan-200">
+            <button onClick={() => scrollTo("future")} className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-7 py-4 font-black text-slate-900 shadow-xl shadow-slate-100 transition duration-300 ease-out hover:-translate-y-1 hover:text-blue-800 dark:border-white/10 dark:bg-white/10 dark:text-white dark:shadow-none dark:hover:bg-white/15 dark:hover:text-cyan-200">
               Voir ma veille <MousePointerClick className="h-5 w-5" />
             </button>
-            <a href={profile.cv} download className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-7 py-4 font-black text-slate-900 shadow-xl shadow-slate-100 transition hover:-translate-y-1 hover:text-blue-800 dark:border-white/10 dark:bg-white/10 dark:text-white dark:shadow-none dark:hover:bg-white/15 dark:hover:text-cyan-200">
+            <a href={profile.cv} download className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-7 py-4 font-black text-slate-900 shadow-xl shadow-slate-100 transition duration-300 ease-out hover:-translate-y-1 hover:text-blue-800 dark:border-white/10 dark:bg-white/10 dark:text-white dark:shadow-none dark:hover:bg-white/15 dark:hover:text-cyan-200">
               Télécharger CV <Download className="h-5 w-5" />
             </a>
           </div>
@@ -966,7 +966,7 @@ function FutureSupportSection() {
                             href={doc.href}
                             target="_blank"
                             rel="noreferrer"
-                            className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-black text-slate-800 ring-1 ring-blue-100 transition hover:-translate-y-0.5 hover:text-blue-700 dark:bg-slate-950/70 dark:text-slate-200 dark:ring-white/10 dark:hover:text-cyan-200"
+                            className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-black text-slate-800 ring-1 ring-blue-100 transition duration-300 ease-out hover:-translate-y-0.5 hover:text-blue-700 dark:bg-slate-950/70 dark:text-slate-200 dark:ring-white/10 dark:hover:text-cyan-200"
                           >
                             {doc.label} <ArrowRight className="h-3.5 w-3.5" />
                           </a>
@@ -985,7 +985,7 @@ function FutureSupportSection() {
                             href={feed.href}
                             target="_blank"
                             rel="noreferrer"
-                            className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-black text-slate-800 ring-1 ring-emerald-100 transition hover:-translate-y-0.5 hover:text-emerald-700 dark:bg-slate-950/70 dark:text-slate-200 dark:ring-white/10 dark:hover:text-emerald-200"
+                            className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-black text-slate-800 ring-1 ring-emerald-100 transition duration-300 ease-out hover:-translate-y-0.5 hover:text-emerald-700 dark:bg-slate-950/70 dark:text-slate-200 dark:ring-white/10 dark:hover:text-emerald-200"
                           >
                             {feed.label} <ArrowRight className="h-3.5 w-3.5" />
                           </a>
@@ -1121,17 +1121,17 @@ function ProjectsSection() {
 
                   <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
                     <div className="flex items-center gap-3">
-                      <button onClick={previous} className="grid h-11 w-11 place-items-center rounded-full bg-white/14 ring-1 ring-white/20 transition hover:bg-white/25" aria-label="Projet précédent">
+                      <button onClick={previous} className="grid h-11 w-11 place-items-center rounded-full bg-white/14 ring-1 ring-white/20 transition duration-300 ease-out hover:bg-white/25" aria-label="Projet précédent">
                         <ChevronLeft className="h-5 w-5" />
                       </button>
-                      <button onClick={next} className="grid h-11 w-11 place-items-center rounded-full bg-white/14 ring-1 ring-white/20 transition hover:bg-white/25" aria-label="Projet suivant">
+                      <button onClick={next} className="grid h-11 w-11 place-items-center rounded-full bg-white/14 ring-1 ring-white/20 transition duration-300 ease-out hover:bg-white/25" aria-label="Projet suivant">
                         <ChevronRight className="h-5 w-5" />
                       </button>
                     </div>
 
                     <button
                       onClick={() => setSelectedProject(current)}
-                      className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-black text-slate-950 transition hover:-translate-y-0.5 hover:bg-cyan-100"
+                      className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-black text-slate-950 transition duration-300 ease-out hover:-translate-y-0.5 hover:bg-cyan-100"
                     >
                       Voir le projet en détail <ExternalLink className="h-4 w-4" />
                     </button>
@@ -1203,7 +1203,7 @@ function RealisationsSection() {
 
                   <button
                     onClick={() => setSelectedProject(project)}
-                    className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-slate-950 px-5 py-3 text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-blue-700 dark:bg-white dark:text-slate-950 dark:hover:bg-cyan-100"
+                    className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-slate-950 px-5 py-3 text-sm font-black text-white transition duration-300 ease-out hover:-translate-y-0.5 hover:bg-blue-700 dark:bg-white dark:text-slate-950 dark:hover:bg-cyan-100"
                   >
                     Voir plus <ExternalLink className="h-4 w-4" />
                   </button>
@@ -1246,7 +1246,7 @@ function ProjectModal({ project, onClose }) {
           >
             <button
               onClick={onClose}
-              className="absolute right-5 top-5 z-10 grid h-11 w-11 place-items-center rounded-full bg-white/10 text-white ring-1 ring-white/15 transition hover:bg-white/20"
+              className="absolute right-5 top-5 z-10 grid h-11 w-11 place-items-center rounded-full bg-white/10 text-white ring-1 ring-white/15 transition duration-300 ease-out hover:bg-white/20"
               aria-label="Fermer"
             >
               <X className="h-6 w-6" />
@@ -1373,7 +1373,7 @@ function ProjectModal({ project, onClose }) {
                         <div className="flex flex-wrap gap-2">
                           <button
                             onClick={() => setLoadedDiagram(true)}
-                            className="rounded-full bg-blue-600 px-4 py-2 text-xs font-black text-white transition hover:-translate-y-0.5 hover:bg-blue-500"
+                            className="rounded-full bg-blue-600 px-4 py-2 text-xs font-black text-white transition duration-300 ease-out hover:-translate-y-0.5 hover:bg-blue-500"
                           >
                             Charger le diagramme
                           </button>
@@ -1381,7 +1381,7 @@ function ProjectModal({ project, onClose }) {
                             href={project.database.iframeSrc}
                             target="_blank"
                             rel="noreferrer"
-                            className="rounded-full bg-white/10 px-4 py-2 text-xs font-black text-white transition hover:-translate-y-0.5 hover:bg-white/20"
+                            className="rounded-full bg-white/10 px-4 py-2 text-xs font-black text-white transition duration-300 ease-out hover:-translate-y-0.5 hover:bg-white/20"
                           >
                             Ouvrir dans dbdiagram
                           </a>
@@ -1459,11 +1459,11 @@ function ProjectModal({ project, onClose }) {
               )}
 
               <div className="flex flex-col justify-center gap-3 pb-2 sm:flex-row">
-                <a href={project.docsLink} className="inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 px-7 py-4 font-black text-white transition hover:-translate-y-0.5 hover:bg-blue-500">
+                <a href={project.docsLink} className="inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 px-7 py-4 font-black text-white transition duration-300 ease-out hover:-translate-y-0.5 hover:bg-blue-500">
                   <BookOpen className="h-5 w-5" />
                   {project.docsLabel}
                 </a>
-                <a href={project.github} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-white/15 px-7 py-4 font-black text-white ring-1 ring-white/15 transition hover:-translate-y-0.5 hover:bg-white/25">
+                <a href={project.github} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-white/15 px-7 py-4 font-black text-white ring-1 ring-white/15 transition duration-300 ease-out hover:-translate-y-0.5 hover:bg-white/25">
                   <Github className="h-5 w-5" />
                   Voir sur GitHub
                 </a>
@@ -1518,7 +1518,7 @@ function ExperienceSection() {
                 <div className="p-6">
                   <p className="font-bold leading-7 text-slate-600 dark:text-slate-300">{exp.summary}</p>
                   <div className="mt-5 flex flex-wrap gap-2">{exp.stack.map((item) => <Pill key={item}>{item}</Pill>)}</div>
-                  <button onClick={() => setOpen(isOpen ? -1 : index)} className="mt-6 flex w-full items-center justify-between rounded-2xl bg-slate-50 px-5 py-4 font-black text-slate-900 ring-1 ring-slate-100 transition hover:bg-blue-50 hover:text-blue-800 dark:bg-white/5 dark:text-white dark:ring-white/10 dark:hover:bg-white/10 dark:hover:text-cyan-200">
+                  <button onClick={() => setOpen(isOpen ? -1 : index)} className="mt-6 flex w-full items-center justify-between rounded-2xl bg-slate-50 px-5 py-4 font-black text-slate-900 ring-1 ring-slate-100 transition duration-300 ease-out hover:bg-blue-50 hover:text-blue-800 dark:bg-white/5 dark:text-white dark:ring-white/10 dark:hover:bg-white/10 dark:hover:text-cyan-200">
                     Voir les missions détaillées
                     <ChevronDown className={`h-5 w-5 transition ${isOpen ? "rotate-180" : ""}`} />
                   </button>
@@ -1640,9 +1640,9 @@ function ContactSection() {
         <h2 className="mt-6 text-3xl font-black tracking-tight text-slate-950 dark:text-white sm:text-5xl">Disponible pour renforcer une équipe support IT.</h2>
         <p className="mx-auto mt-4 max-w-2xl text-lg font-semibold leading-8 text-slate-600 dark:text-slate-300">Helpdesk, support applicatif, poste de travail, assistance de proximité et suivi utilisateur en Île-de-France.</p>
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-          <a href={`mailto:${profile.email}`} className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-950 px-7 py-4 font-black text-white shadow-xl shadow-slate-200 transition hover:-translate-y-1 hover:bg-blue-700 dark:bg-white dark:text-slate-950 dark:shadow-none dark:hover:bg-cyan-100">Envoyer un email <Mail className="h-5 w-5" /></a>
-          <a href={`tel:${profile.phoneHref}`} className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-7 py-4 font-black text-slate-900 shadow-xl shadow-slate-100 transition hover:-translate-y-1 hover:text-blue-800 dark:border-white/10 dark:bg-white/10 dark:text-white dark:shadow-none dark:hover:text-cyan-200">Appeler <Phone className="h-5 w-5" /></a>
-          <a href={profile.cv} download className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-7 py-4 font-black text-slate-900 shadow-xl shadow-slate-100 transition hover:-translate-y-1 hover:text-blue-800 dark:border-white/10 dark:bg-white/10 dark:text-white dark:shadow-none dark:hover:text-cyan-200">CV <Download className="h-5 w-5" /></a>
+          <a href={`mailto:${profile.email}`} className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-950 px-7 py-4 font-black text-white shadow-xl shadow-slate-200 transition duration-300 ease-out hover:-translate-y-1 hover:bg-blue-700 dark:bg-white dark:text-slate-950 dark:shadow-none dark:hover:bg-cyan-100">Envoyer un email <Mail className="h-5 w-5" /></a>
+          <a href={`tel:${profile.phoneHref}`} className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-7 py-4 font-black text-slate-900 shadow-xl shadow-slate-100 transition duration-300 ease-out hover:-translate-y-1 hover:text-blue-800 dark:border-white/10 dark:bg-white/10 dark:text-white dark:shadow-none dark:hover:text-cyan-200">Appeler <Phone className="h-5 w-5" /></a>
+          <a href={profile.cv} download className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-7 py-4 font-black text-slate-900 shadow-xl shadow-slate-100 transition duration-300 ease-out hover:-translate-y-1 hover:text-blue-800 dark:border-white/10 dark:bg-white/10 dark:text-white dark:shadow-none dark:hover:text-cyan-200">CV <Download className="h-5 w-5" /></a>
         </div>
         <div className="mt-8 grid gap-3 text-left sm:grid-cols-3">
           <div className="rounded-3xl bg-slate-50 p-4 ring-1 ring-slate-100 dark:bg-white/5 dark:ring-white/10"><p className="text-xs font-black uppercase text-slate-400 dark:text-slate-500">Email</p><p className="mt-1 break-all text-sm font-black text-slate-700 dark:text-slate-200">{profile.email}</p></div>
@@ -1651,6 +1651,46 @@ function ContactSection() {
         </div>
       </div>
     </section>
+  );
+}
+
+
+function LoadingScreen() {
+  return (
+    <motion.div
+      className="fixed inset-0 z-[200] grid place-items-center bg-slate-950 text-white"
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.45, ease: "easeOut" }}
+    >
+      <div className="px-6 text-center">
+        <motion.div
+          animate={{ scale: [1, 1.08, 1], rotate: [0, 2, -2, 0] }}
+          transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
+          className="mx-auto grid h-24 w-24 place-items-center overflow-hidden rounded-[2rem] bg-gradient-to-br from-blue-600 to-fuchsia-600 p-1 shadow-2xl shadow-blue-950/40"
+        >
+          <img
+            src={profile.photo}
+            alt="Samia Boutezrout"
+            className="h-full w-full rounded-[1.75rem] object-cover"
+          />
+        </motion.div>
+
+        <h1 className="mt-6 text-4xl font-black tracking-tight">Samia Boutezrout</h1>
+        <p className="mt-2 font-black text-cyan-200">Portfolio Support IT</p>
+
+        <div className="mx-auto mt-8 h-2 max-w-xs overflow-hidden rounded-full bg-white/10">
+          <motion.div
+            className="h-full rounded-full bg-gradient-to-r from-blue-500 via-cyan-300 to-fuchsia-400"
+            initial={{ width: "0%" }}
+            animate={{ width: "100%" }}
+            transition={{ duration: 1.35, ease: "easeInOut" }}
+          />
+        </div>
+
+        <p className="mt-4 text-sm font-bold text-slate-400">Chargement du portfolio...</p>
+      </div>
+    </motion.div>
   );
 }
 
@@ -1666,6 +1706,8 @@ function Footer() {
 }
 
 export default function App() {
+  const [showLoader, setShowLoader] = useState(true);
+
   const [theme, setTheme] = useState(() => {
     if (typeof window === "undefined") return "light";
     return localStorage.getItem("theme") || "light";
@@ -1675,11 +1717,17 @@ export default function App() {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
+  useEffect(() => {
+    const timer = window.setTimeout(() => setShowLoader(false), 1500);
+    return () => window.clearTimeout(timer);
+  }, []);
+
   const toggleTheme = () => setTheme((current) => (current === "dark" ? "light" : "dark"));
 
   return (
     <main className={`${theme === "dark" ? "dark" : ""} min-h-screen scroll-smooth bg-white font-sans text-slate-900 selection:bg-cyan-100 selection:text-blue-950`}>
       <div className="min-h-screen bg-white transition-colors duration-300 dark:bg-slate-950">
+        <AnimatePresence>{showLoader && <LoadingScreen />}</AnimatePresence>
         <Navbar theme={theme} toggleTheme={toggleTheme} />
         <Hero theme={theme} toggleTheme={toggleTheme} />
         <ValueSection />
@@ -1692,10 +1740,10 @@ export default function App() {
         <ContactSection />
         <Footer />
 
-        <button onClick={toggleTheme} className="fixed bottom-5 left-5 z-40 hidden h-14 w-14 items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-900 shadow-2xl shadow-slate-200 transition hover:-translate-y-1 dark:border-white/10 dark:bg-slate-900 dark:text-white dark:shadow-black/30 sm:inline-flex" aria-label="Changer le thème">
+        <button onClick={toggleTheme} className="fixed bottom-5 left-5 z-40 hidden h-14 w-14 items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-900 shadow-2xl shadow-slate-200 transition duration-300 ease-out hover:-translate-y-1 dark:border-white/10 dark:bg-slate-900 dark:text-white dark:shadow-black/30 sm:inline-flex" aria-label="Changer le thème">
           {theme === "dark" ? <Sun className="h-6 w-6" /> : <Moon className="h-6 w-6" />}
         </button>
-        <a href={`mailto:${profile.email}?subject=Opportunité CDI Support IT - Samia Boutezrout`} className="fixed bottom-5 right-5 z-40 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-700 to-fuchsia-600 text-white shadow-2xl shadow-blue-200 transition hover:-translate-y-1 dark:shadow-blue-950/30 sm:hidden" aria-label="Contacter Samia">
+        <a href={`mailto:${profile.email}?subject=Opportunité CDI Support IT - Samia Boutezrout`} className="fixed bottom-5 right-5 z-40 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-700 to-fuchsia-600 text-white shadow-2xl shadow-blue-200 transition duration-300 ease-out hover:-translate-y-1 dark:shadow-blue-950/30 sm:hidden" aria-label="Contacter Samia">
           <Mail className="h-6 w-6" />
         </a>
       </div>
