@@ -58,8 +58,8 @@ const nav = [
   { label: "Accueil", id: "home" },
   { label: "Valeur", id: "value" },
   { label: "Veille", id: "future" },
-  { label: "Réalisations", id: "projects" },
   { label: "Projets", id: "projects" },
+  { label: "Réalisations", id: "realisations" },
   { label: "Expérience", id: "experience" },
   { label: "Stack", id: "stack" },
   { label: "Contact", id: "contact" },
@@ -364,8 +364,93 @@ const projects = [
     docsLabel: "Télécharger la documentation",
     docsLink: "#",
     github: "https://github.com/samaholicc/task_manager",
+  },,
+  {
+    title: "SchoolManagement",
+    type: "Application desktop",
+    stack: "C# · WinForms · MySQL · .NET Framework",
+    icon: GraduationCap,
+    gradient: "from-blue-700 via-indigo-700 to-slate-950",
+    description:
+      "Application desktop de gestion scolaire avec gestion des étudiants, départements, matières, classes et authentification.",
+    intro:
+      "SchoolManagement est une application desktop développée en C# avec WinForms. Elle permet de gérer les éléments principaux d’un établissement : étudiants, départements, matières, classes et profils utilisateurs. Le projet s’appuie sur une architecture orientée services/repositories et une base MySQL.",
+    screenshots: [
+      { label: "Page de connexion", src: "/projects/school-login.png" },
+      { label: "Ajouter un étudiant", src: "/projects/school-add-student.png" },
+      { label: "Ajouter un département", src: "/projects/school-add-department.png" },
+      { label: "Ajouter une matière", src: "/projects/school-add-subject.png" },
+      { label: "Modifier une classe", src: "/projects/school-edit-class.png" },
+    ],
+    features: [
+      "Authentification utilisateur",
+      "Gestion des étudiants",
+      "Gestion des départements",
+      "Gestion des matières",
+      "Gestion des classes et sections",
+      "Interface WinForms avec formulaires dédiés",
+    ],
+    tech: ["C#", "WinForms", ".NET Framework 4.8", "MySQL", "MySql.Data", "Newtonsoft.Json", "xUnit"],
+    prerequisites: ["Visual Studio", ".NET Framework 4.8", "MySQL Server", "NuGet packages"],
+    deployment: [
+      "Ouvrir SchoolManagement.sln dans Visual Studio",
+      "Restaurer les packages NuGet",
+      "Configurer la connexion MySQL",
+      "Compiler la solution",
+      "Lancer le projet SchoolManagement",
+    ],
+    docsLabel: "Documentation du projet",
+    docsLink: "#",
+    github: "#",
   },
+  {
+    title: "LocManager",
+    type: "Application web full-stack",
+    stack: "React · Node.js · Express · MySQL",
+    icon: Users,
+    gradient: "from-emerald-600 via-teal-700 to-slate-950",
+    description:
+      "Plateforme de gestion immobilière pour administrateurs, employés, propriétaires et locataires.",
+    intro:
+      "LocManager est une application web full-stack de gestion immobilière. Elle facilite la gestion des profils utilisateurs, plaintes, demandes de maintenance, paiements d’entretien et tableaux de bord selon les rôles : administrateur, employé, propriétaire ou locataire.",
+    screenshots: [
+      { label: "Page de connexion", src: "/projects/loc-login.png" },
+      { label: "Dashboard administrateur", src: "/projects/loc-admin-dashboard.png" },
+      { label: "Dashboard employé", src: "/projects/loc-employee-dashboard.png" },
+      { label: "Dashboard propriétaire", src: "/projects/loc-owner-dashboard.png" },
+      { label: "Dashboard locataire", src: "/projects/loc-tenant-dashboard.png" },
+      { label: "Modifier le profil", src: "/projects/loc-edit-profile.png" },
+      { label: "Dépôt de plainte", src: "/projects/loc-raise-complaint.png" },
+    ],
+    features: [
+      "Gestion des locataires, propriétaires et employés",
+      "Dépôt et suivi des plaintes",
+      "Gestion des demandes de maintenance",
+      "Tableaux de bord selon les rôles",
+      "Authentification et vérification email",
+      "Notifications et interface moderne",
+      "Mode sombre",
+    ],
+    tech: ["React", "React Router", "Axios", "Framer Motion", "Tailwind CSS", "Node.js", "Express", "MySQL2", "Nodemailer", "JWT"],
+    prerequisites: ["Node.js 18", "npm", "MySQL", "Variables .env client/server"],
+    deployment: [
+      "cd server",
+      "npm install",
+      "Configurer le fichier .env",
+      "npm start",
+      "cd ../client",
+      "npm install",
+      "npm run build",
+    ],
+    docsLabel: "Documentation du projet",
+    docsLink: "#",
+    github: "#",
+  }
 ];
+
+const flagshipProjects = projects.filter((project) => ["SchoolManagement", "LocManager"].includes(project.title));
+
+const realisations = projects.filter((project) => !["SchoolManagement", "LocManager"].includes(project.title));
 
 const stackGroups = [
   {
@@ -530,7 +615,7 @@ function Navbar({ theme, toggleTheme }) {
   const [open, setOpen] = useState(false);
   return (
     <header className="sticky top-0 z-50 border-b border-white/40 bg-white/75 backdrop-blur-2xl dark:border-white/10 dark:bg-slate-950/75">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
+      <nav className="mx-auto flex max-w-[92rem] items-center justify-between px-5 py-4">
         <button onClick={() => scrollTo("home")} className="flex items-center gap-3 rounded-full focus:outline-none focus:ring-4 focus:ring-blue-100 dark:focus:ring-blue-900">
           <img src={profile.photo} alt="Samia Boutezrout" className="h-12 w-12 rounded-2xl object-cover object-center shadow-xl shadow-blue-100 ring-2 ring-white dark:shadow-blue-950/30 dark:ring-white/20" />
           <span className="text-left">
@@ -541,7 +626,7 @@ function Navbar({ theme, toggleTheme }) {
 
         <div className="hidden items-center gap-1 rounded-full border border-slate-200 bg-white/80 p-1 shadow-sm dark:border-white/10 dark:bg-white/5 lg:flex">
           {nav.map((item) => (
-            <button key={item.id} onClick={() => scrollTo(item.id)} className="rounded-full px-4 py-2 text-sm font-black text-slate-600 transition hover:bg-blue-50 hover:text-blue-800 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-cyan-200">
+            <button key={item.id} onClick={() => scrollTo(item.id)} className="rounded-full px-3 py-2 text-xs font-black text-slate-600 transition hover:bg-blue-50 hover:text-blue-800 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-cyan-200 xl:px-4 xl:text-sm">
               {item.label}
             </button>
           ))}
@@ -898,36 +983,36 @@ function FutureSupportSection() {
 function ProjectsSection() {
   const [active, setActive] = useState(0);
   const [selectedProject, setSelectedProject] = useState(null);
-  const current = projects[active];
+  const current = flagshipProjects[active] || flagshipProjects[0];
   const CurrentIcon = current.icon;
 
-  const previous = () => setActive((index) => (index === 0 ? projects.length - 1 : index - 1));
-  const next = () => setActive((index) => (index === projects.length - 1 ? 0 : index + 1));
+  const previous = () => setActive((index) => (index === 0 ? flagshipProjects.length - 1 : index - 1));
+  const next = () => setActive((index) => (index === flagshipProjects.length - 1 ? 0 : index + 1));
 
   return (
-    <section id="projects" className="relative overflow-hidden bg-white px-5 py-20 dark:bg-slate-950">
+    <section id="projects" className="relative overflow-hidden bg-white px-5 py-24 dark:bg-slate-950">
       <motion.div
-        animate={{ x: [0, 25, 0], y: [0, -20, 0] }}
+        animate={{ x: [0, 30, 0], y: [0, -24, 0], scale: [1, 1.08, 1] }}
         transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
         className="absolute left-0 top-20 h-96 w-96 rounded-full bg-blue-200 opacity-40 blur-3xl dark:bg-blue-700 dark:opacity-20"
       />
       <motion.div
-        animate={{ x: [0, -30, 0], y: [0, 20, 0] }}
+        animate={{ x: [0, -35, 0], y: [0, 20, 0], scale: [1, 1.1, 1] }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-fuchsia-200 opacity-40 blur-3xl dark:bg-fuchsia-700 dark:opacity-20"
       />
 
       <div className="relative mx-auto max-w-7xl">
         <SectionHeader
-          eyebrow="Réalisations"
-          title="Mes réalisations techniques"
-          subtitle="Quelques projets qui montrent ma logique applicative, ma rigueur et ma capacité à documenter un projet."
-          icon={Code2}
+          eyebrow="Projets principaux"
+          title="Mes projets les plus importants"
+          subtitle="Deux projets complets qui montrent ma capacité à construire, documenter et présenter une application de bout en bout."
+          icon={Rocket}
         />
 
-        <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-          <div className="grid gap-4">
-            {projects.map((project, index) => {
+        <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
+          <div className="grid gap-5">
+            {flagshipProjects.map((project, index) => {
               const Icon = project.icon;
               const isActive = active === index;
 
@@ -935,33 +1020,51 @@ function ProjectsSection() {
                 <motion.button
                   key={project.title}
                   onClick={() => setActive(index)}
-                  whileHover={{ x: 6 }}
+                  whileHover={{ x: 8, scale: 1.01 }}
                   whileTap={{ scale: 0.98 }}
-                  className={`group rounded-[1.75rem] p-5 text-left transition ${
+                  className={`group overflow-hidden rounded-[2rem] border p-6 text-left transition ${
                     isActive
-                      ? "bg-slate-950 text-white shadow-2xl shadow-slate-200 dark:bg-white dark:text-slate-950 dark:shadow-none"
-                      : "bg-slate-50 text-slate-800 ring-1 ring-slate-200 hover:bg-blue-50 hover:text-blue-800 dark:bg-white/5 dark:text-slate-200 dark:ring-white/10 dark:hover:bg-white/10 dark:hover:text-cyan-200"
+                      ? "border-blue-600 bg-slate-950 text-white shadow-2xl shadow-blue-100 dark:border-cyan-300/30 dark:bg-white dark:text-slate-950 dark:shadow-none"
+                      : "border-slate-200 bg-white text-slate-800 shadow-xl shadow-slate-100 hover:border-blue-200 hover:bg-blue-50 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:shadow-black/20 dark:hover:bg-white/10"
                   }`}
                 >
-                  <div className="flex items-center justify-between gap-4">
-                    <div className="flex items-center gap-4">
-                      <span className={`grid h-14 w-14 place-items-center rounded-2xl ${
-                        isActive
-                          ? "bg-white/12 text-cyan-200 dark:bg-slate-950 dark:text-cyan-300"
-                          : "bg-white text-blue-700 ring-1 ring-slate-200 dark:bg-white/10 dark:text-cyan-200 dark:ring-white/10"
-                      }`}>
-                        <Icon className="h-6 w-6" />
-                      </span>
-                      <span>
-                        <span className="block text-lg font-black">{project.title}</span>
-                        <span className={`text-xs font-black uppercase tracking-wide ${
-                          isActive ? "text-cyan-200 dark:text-blue-700" : "text-slate-500 dark:text-slate-400"
+                  <div className="flex items-start gap-4">
+                    <span className={`grid h-16 w-16 shrink-0 place-items-center rounded-3xl ${
+                      isActive
+                        ? "bg-white/12 text-cyan-200 dark:bg-slate-950 dark:text-cyan-300"
+                        : "bg-slate-50 text-blue-700 ring-1 ring-slate-200 dark:bg-white/10 dark:text-cyan-200 dark:ring-white/10"
+                    }`}>
+                      <Icon className="h-8 w-8" />
+                    </span>
+
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className={`rounded-full px-3 py-1 text-[11px] font-black uppercase tracking-wide ${
+                          isActive
+                            ? "bg-white/10 text-cyan-200 dark:bg-blue-50 dark:text-blue-700"
+                            : "bg-blue-50 text-blue-700 dark:bg-cyan-400/10 dark:text-cyan-200"
+                        }`}>
+                          Projet complet
+                        </span>
+                        <span className={`rounded-full px-3 py-1 text-[11px] font-black uppercase tracking-wide ${
+                          isActive
+                            ? "bg-white/10 text-white/80 dark:bg-slate-100 dark:text-slate-600"
+                            : "bg-slate-100 text-slate-500 dark:bg-white/10 dark:text-slate-300"
                         }`}>
                           {project.type}
                         </span>
-                      </span>
+                      </div>
+
+                      <h3 className="mt-4 text-2xl font-black tracking-tight">{project.title}</h3>
+                      <p className={`mt-2 text-sm font-black ${isActive ? "text-cyan-200 dark:text-blue-700" : "text-blue-700 dark:text-cyan-300"}`}>
+                        {project.stack}
+                      </p>
+                      <p className={`mt-3 line-clamp-3 text-sm font-semibold leading-6 ${isActive ? "text-white/75 dark:text-slate-600" : "text-slate-600 dark:text-slate-300"}`}>
+                        {project.description}
+                      </p>
                     </div>
-                    <ArrowRight className="h-5 w-5 transition group-hover:translate-x-1" />
+
+                    <ArrowRight className="mt-2 h-5 w-5 shrink-0 transition group-hover:translate-x-1" />
                   </div>
                 </motion.button>
               );
@@ -975,62 +1078,115 @@ function ProjectsSection() {
               animate={{ opacity: 1, x: 0, scale: 1 }}
               exit={{ opacity: 0, x: -24, scale: 0.98 }}
               transition={{ duration: 0.35 }}
-              className="overflow-hidden rounded-[2.5rem] border border-slate-200 bg-white shadow-2xl shadow-slate-100 dark:border-white/10 dark:bg-white/10 dark:shadow-black/20"
+              className="overflow-hidden rounded-[2.75rem] border border-slate-200 bg-white shadow-2xl shadow-slate-100 dark:border-white/10 dark:bg-white/10 dark:shadow-black/20"
             >
-              <div className={`relative min-h-[260px] bg-gradient-to-br ${current.gradient} p-7 text-white`}>
-                <div className="absolute right-8 top-8 opacity-20">
-                  <CurrentIcon className="h-40 w-40" />
+              <div className={`relative min-h-[330px] bg-gradient-to-br ${current.gradient} p-8 text-white`}>
+                <div className="absolute right-8 top-8 opacity-15">
+                  <CurrentIcon className="h-48 w-48" />
                 </div>
 
-                <div className="relative flex h-full min-h-[220px] flex-col justify-between">
+                <div className="relative flex min-h-[280px] flex-col justify-between">
                   <div>
-                    <span className="rounded-full bg-white/16 px-4 py-2 text-xs font-black ring-1 ring-white/20">
-                      {current.type}
+                    <span className="rounded-full bg-white/16 px-4 py-2 text-xs font-black uppercase tracking-wide ring-1 ring-white/20">
+                      Projet mis en avant
                     </span>
-                    <h3 className="mt-6 text-4xl font-black tracking-tight">{current.title}</h3>
-                    <p className="mt-2 text-lg font-black text-white/85">{current.stack}</p>
+                    <h3 className="mt-7 text-5xl font-black tracking-tight">{current.title}</h3>
+                    <p className="mt-3 text-xl font-black text-white/85">{current.stack}</p>
+                    <p className="mt-5 max-w-2xl text-base font-semibold leading-8 text-white/75">{current.description}</p>
                   </div>
 
-                  <div className="mt-8 flex items-center gap-3">
-                    <button onClick={previous} className="grid h-11 w-11 place-items-center rounded-full bg-white/14 ring-1 ring-white/20 transition hover:bg-white/25" aria-label="Projet précédent">
-                      <ChevronLeft className="h-5 w-5" />
-                    </button>
-                    <button onClick={next} className="grid h-11 w-11 place-items-center rounded-full bg-white/14 ring-1 ring-white/20 transition hover:bg-white/25" aria-label="Projet suivant">
-                      <ChevronRight className="h-5 w-5" />
+                  <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <button onClick={previous} className="grid h-11 w-11 place-items-center rounded-full bg-white/14 ring-1 ring-white/20 transition hover:bg-white/25" aria-label="Projet précédent">
+                        <ChevronLeft className="h-5 w-5" />
+                      </button>
+                      <button onClick={next} className="grid h-11 w-11 place-items-center rounded-full bg-white/14 ring-1 ring-white/20 transition hover:bg-white/25" aria-label="Projet suivant">
+                        <ChevronRight className="h-5 w-5" />
+                      </button>
+                    </div>
+
+                    <button
+                      onClick={() => setSelectedProject(current)}
+                      className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-black text-slate-950 transition hover:-translate-y-0.5 hover:bg-cyan-100"
+                    >
+                      Voir le projet en détail <ExternalLink className="h-4 w-4" />
                     </button>
                   </div>
                 </div>
               </div>
 
-              <div className="p-6 md:p-8">
-                <p className="font-semibold leading-8 text-slate-600 dark:text-slate-300">{current.description}</p>
+              <div className="grid gap-3 p-6 sm:grid-cols-2">
+                {current.features.slice(0, 4).map((point) => (
+                  <div key={point} className="flex items-center gap-3 rounded-2xl bg-slate-50 px-4 py-3 text-sm font-black text-slate-700 ring-1 ring-slate-100 dark:bg-slate-950/60 dark:text-slate-200 dark:ring-white/10">
+                    <CheckCircle2 className="h-5 w-5 shrink-0 text-blue-700 dark:text-cyan-300" />
+                    {point}
+                  </div>
+                ))}
+              </div>
+            </motion.article>
+          </AnimatePresence>
+        </div>
+      </div>
 
-                <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                  {current.points?.map((point) => (
-                    <div key={point} className="flex items-center gap-3 rounded-2xl bg-slate-50 px-4 py-3 text-sm font-black text-slate-700 ring-1 ring-slate-100 dark:bg-slate-950/60 dark:text-slate-200 dark:ring-white/10">
-                      <CheckCircle2 className="h-5 w-5 shrink-0 text-blue-700 dark:text-cyan-300" />
-                      {point}
-                    </div>
-                  ))}
+      <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+    </section>
+  );
+}
+
+function RealisationsSection() {
+  const [selectedProject, setSelectedProject] = useState(null);
+
+  return (
+    <section id="realisations" className="bg-slate-50 px-5 py-20 dark:bg-slate-900/60">
+      <div className="mx-auto max-w-7xl">
+        <SectionHeader
+          eyebrow="Autres réalisations"
+          title="Réalisations complémentaires"
+          subtitle="Des projets plus courts qui complètent mon parcours et montrent ma polyvalence technique."
+          icon={Code2}
+        />
+
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          {realisations.map((project, index) => {
+            const Icon = project.icon;
+            return (
+              <motion.article
+                key={project.title}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ delay: index * 0.06 }}
+                whileHover={{ y: -8 }}
+                className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-xl shadow-slate-100 dark:border-white/10 dark:bg-white/10 dark:shadow-black/20"
+              >
+                <div className={`relative min-h-[180px] bg-gradient-to-br ${project.gradient} p-6 text-white`}>
+                  <div className="absolute right-4 top-4 opacity-20">
+                    <Icon className="h-28 w-28" />
+                  </div>
+                  <div className="relative">
+                    <span className="rounded-full bg-white/16 px-3 py-1.5 text-[11px] font-black uppercase tracking-wide ring-1 ring-white/20">
+                      Réalisation
+                    </span>
+                    <h3 className="mt-6 text-2xl font-black">{project.title}</h3>
+                    <p className="mt-2 text-sm font-black text-white/80">{project.stack}</p>
+                  </div>
                 </div>
 
-                <div className="mt-7 flex items-center justify-between gap-4">
-                  <div className="flex gap-2">
-                    {projects.map((project, index) => (
-                      <button key={project.title} onClick={() => setActive(index)} className={`h-2.5 rounded-full transition ${active === index ? "w-8 bg-blue-700 dark:bg-cyan-300" : "w-2.5 bg-slate-300 dark:bg-white/30"}`} aria-label={`Voir ${project.title}`} />
-                    ))}
-                  </div>
+                <div className="p-5">
+                  <p className="line-clamp-3 text-sm font-semibold leading-6 text-slate-600 dark:text-slate-300">
+                    {project.description}
+                  </p>
 
                   <button
-                    onClick={() => setSelectedProject(current)}
-                    className="inline-flex items-center gap-2 rounded-full bg-slate-950 px-5 py-3 text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-blue-700 dark:bg-white dark:text-slate-950 dark:hover:bg-cyan-100"
+                    onClick={() => setSelectedProject(project)}
+                    className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-slate-950 px-5 py-3 text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-blue-700 dark:bg-white dark:text-slate-950 dark:hover:bg-cyan-100"
                   >
                     Voir plus <ExternalLink className="h-4 w-4" />
                   </button>
                 </div>
-              </div>
-            </motion.article>
-          </AnimatePresence>
+              </motion.article>
+            );
+          })}
         </div>
       </div>
 
@@ -1123,7 +1279,7 @@ function ProjectModal({ project, onClose }) {
               )}
 
               <section>
-                <h3 className="text-center text-2xl font-black">Fonctionnalités de l’application</h3>
+                <h3 className="text-center text-2xl font-black">Fonctionnalités</h3>
                 <div className="mt-6 grid gap-3 md:grid-cols-2">
                   {project.features.map((item) => (
                     <div key={item} className="flex items-center gap-3 rounded-2xl bg-white/5 px-4 py-3 font-bold text-slate-200 ring-1 ring-white/10">
@@ -1188,19 +1344,11 @@ function ProjectModal({ project, onClose }) {
               )}
 
               <div className="flex flex-col justify-center gap-3 pb-2 sm:flex-row">
-                <a
-                  href={project.docsLink}
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 px-7 py-4 font-black text-white transition hover:-translate-y-0.5 hover:bg-blue-500"
-                >
+                <a href={project.docsLink} className="inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 px-7 py-4 font-black text-white transition hover:-translate-y-0.5 hover:bg-blue-500">
                   <BookOpen className="h-5 w-5" />
                   {project.docsLabel}
                 </a>
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-white/15 px-7 py-4 font-black text-white ring-1 ring-white/15 transition hover:-translate-y-0.5 hover:bg-white/25"
-                >
+                <a href={project.github} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-white/15 px-7 py-4 font-black text-white ring-1 ring-white/15 transition hover:-translate-y-0.5 hover:bg-white/25">
                   <Github className="h-5 w-5" />
                   Voir sur GitHub
                 </a>
@@ -1394,7 +1542,7 @@ function ContactSection() {
 function Footer() {
   return (
     <footer className="border-t border-slate-200 bg-white px-5 py-8 dark:border-white/10 dark:bg-slate-950">
-      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
+      <div className="mx-auto flex max-w-[92rem] flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
         <p className="text-sm font-semibold text-slate-500 dark:text-slate-400">© {new Date().getFullYear()} {profile.name}. Portfolio support IT.</p>
         <div className="flex items-center gap-2 text-sm font-black text-blue-700 dark:text-cyan-300"><Sparkles className="h-4 w-4" /> Mode clair / sombre inclus</div>
       </div>
@@ -1422,6 +1570,7 @@ export default function App() {
         <ValueSection />
         <FutureSupportSection />
         <ProjectsSection />
+        <RealisationsSection />
         <ExperienceSection />
         <StackSection />
         <EducationStrip />
