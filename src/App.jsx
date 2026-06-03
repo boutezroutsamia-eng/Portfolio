@@ -217,17 +217,18 @@ const projects = [
     icon: Code2,
     gradient: "from-indigo-700 via-blue-700 to-slate-950",
     description:
-      "Application simple et efficace de gestion de tâches permettant aux utilisateurs de créer, modifier, supprimer et suivre des tâches avec priorités et échéances.",
+      "Application desktop de gestion de tâches avec interface WinForms, priorités, statuts et suivi des échéances.",
     intro:
-      "My App Todo est une application de gestion de tâches conçue pour mieux organiser le travail quotidien. Elle propose une interface intuitive pour créer, mettre à jour et supprimer des tâches, avec définition des priorités, statuts et dates.",
+      "My App Todo est une application simple et efficace de gestion de tâches qui permet aux utilisateurs de mieux organiser leur travail. L’application propose une interface intuitive pour créer, mettre à jour et supprimer des tâches, tout en permettant de définir des priorités et des échéances.",
     screenshots: [
-      { label: "Interface principale", src: "/projects/todo-main.png" },
-      { label: "Fenêtre d’ajout de tâche", src: "/projects/todo-add.png" },
+      { label: "Interface principale", src: "/projects/todo-main.jpg" },
+      { label: "Fenêtre d’ajout de tâche", src: "/projects/todo-add.jpg" },
     ],
     features: [
-      "Création, modification et suppression de tâches",
-      "Gestion des statuts : en cours, terminé, suspendu",
-      "Priorités et dates de début / fin",
+      "Ajouter des tâches avec nom, dates, statut et priorité",
+      "Modifier les tâches existantes",
+      "Supprimer les tâches terminées ou inutiles",
+      "Visualiser les tâches dans une grille claire",
       "Stockage local avec SQLite",
       "Interface WinForms simple et lisible",
     ],
@@ -255,9 +256,9 @@ const projects = [
     intro:
       "Projet de site vitrine conçu pour présenter une activité, des services et des réalisations avec une interface claire, responsive et dynamique.",
     screenshots: [
-      { label: "Section accueil", src: "/projects/site-home.png" },
-      { label: "Section portfolio", src: "/projects/site-portfolio.png" },
-      { label: "Section contact", src: "/projects/site-contact.png" },
+      { label: "Page d’accueil", src: "/projects/site-home.jpg" },
+      { label: "Section portfolio", src: "/projects/site-portfolio.jpg" },
+      { label: "Section contact", src: "/projects/site-contact.jpg" },
     ],
     features: [
       "Page d’accueil claire et professionnelle",
@@ -289,9 +290,9 @@ const projects = [
     intro:
       "ArtSphere est une plateforme web pour les artistes, leur permettant de dessiner, partager leurs œuvres, consulter une galerie et interagir avec d’autres utilisateurs.",
     screenshots: [
-      { label: "Éditeur de dessin", src: "/projects/artsphere-editor.png" },
-      { label: "Galerie", src: "/projects/artsphere-gallery.png" },
-      { label: "Profil utilisateur", src: "/projects/artsphere-profile.png" },
+      { label: "Éditeur de dessin", src: "/projects/artsphere-editor.jpg" },
+      { label: "Galerie des créations", src: "/projects/artsphere-gallery.jpg" },
+      { label: "Profil utilisateur", src: "/projects/artsphere-profile.jpg" },
     ],
     features: [
       "Éditeur de dessin interactif",
@@ -328,10 +329,11 @@ const projects = [
     intro:
       "Le Gestionnaire des tâches est une application web développée avec le framework Laravel. Elle permet de créer, modifier, suivre et supprimer des tâches depuis une interface simple. L’architecture MVC de Laravel apporte une structure claire, organisée et maintenable.",
     screenshots: [
-      { label: "Tableau de bord", src: "/projects/task-dashboard.png" },
-      { label: "Créer une tâche", src: "/projects/task-create.png" },
-      { label: "Mes tâches", src: "/projects/task-list.png" },
-      { label: "Réinitialisation du mot de passe", src: "/projects/task-reset-password.png" },
+      { label: "Page d’accueil", src: "/projects/task-home.jpg" },
+      { label: "Liste des tâches", src: "/projects/task-list.jpg" },
+      { label: "Mode sombre / liste", src: "/projects/task-list-dark.jpg" },
+      { label: "Créer une tâche", src: "/projects/task-create.jpg" },
+      { label: "Réinitialisation du mot de passe", src: "/projects/task-reset-password.jpg" },
     ],
     features: [
       "Créer des tâches : définir une tâche, une description et une priorité.",
