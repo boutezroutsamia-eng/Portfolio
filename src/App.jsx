@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowRight,
+  ArrowUp,
   BriefcaseBusiness,
   CheckCircle2,
   ChevronDown,
@@ -33,6 +34,8 @@ import {
   Layers3,
   Code2,
   ExternalLink,
+  Eye,
+  Filter,
   ChevronLeft,
   ChevronRight,
   Github,
@@ -57,6 +60,7 @@ const profile = {
 const nav = [
   { label: "Accueil", id: "home" },
   { label: "Valeur", id: "value" },
+  { label: "Apport", id: "apport" },
   { label: "Veille", id: "future" },
   { label: "Projets", id: "projects" },
   { label: "Réalisations", id: "realisations" },
@@ -212,6 +216,7 @@ const experiences = [
 const projects = [
   {
     title: "My App Todo",
+    category: "desktop",
     type: "Application desktop",
     stack: "C# · WinForms · SQLite",
     icon: Code2,
@@ -247,6 +252,7 @@ const projects = [
   },
   {
     title: "Site vitrine",
+    category: "web",
     type: "Front-end",
     stack: "React · JavaScript",
     icon: MonitorCog,
@@ -281,6 +287,7 @@ const projects = [
   },
   {
     title: "ArtSphere",
+    category: "web",
     type: "Application web",
     stack: "React · Firebase",
     icon: Sparkles,
@@ -320,6 +327,7 @@ const projects = [
   },
   {
     title: "Gestionnaire des tâches",
+    category: "database",
     type: "Application web",
     stack: "Laravel · PHP · MySQL · Blade",
     icon: ClipboardList,
@@ -367,6 +375,7 @@ const projects = [
   },,
   {
     title: "SchoolManagement",
+    category: "database",
     type: "Application desktop",
     stack: "C# · WinForms · MySQL · .NET Framework",
     icon: GraduationCap,
@@ -413,6 +422,7 @@ const projects = [
   },
   {
     title: "LocManager",
+    category: "support",
     type: "Application web full-stack",
     stack: "React · Node.js · Express · MySQL",
     icon: Users,
@@ -1005,13 +1015,33 @@ function FutureSupportSection() {
 
 
 function ProjectsSection() {
+  const [projectFilter, setProjectFilter] = useState("all");
+  const projectCounts = {
+    all: flagshipProjects.length,
+    support: flagshipProjects.filter((project) => project.category === "support").length,
+    web: flagshipProjects.filter((project) => project.category === "web").length,
+    desktop: flagshipProjects.filter((project) => project.category === "desktop").length,
+    database: flagshipProjects.filter((project) => project.category === "database").length,
+  };
+  const visibleFlagshipProjects =
+    projectFilter === "all"
+      ? flagshipProjects
+      : flagshipProjects.filter((project) => project.category === projectFilter);
+
   const [active, setActive] = useState(0);
   const [selectedProject, setSelectedProject] = useState(null);
-  const current = flagshipProjects[active] || flagshipProjects[0];
+
+  useEffect(() => {
+    setActive(0);
+  }, [projectFilter]);
+
+  const current = visibleFlagshipProjects[active] || visibleFlagshipProjects[0] || flagshipProjects[0];
   const CurrentIcon = current.icon;
 
-  const previous = () => setActive((index) => (index === 0 ? flagshipProjects.length - 1 : index - 1));
-  const next = () => setActive((index) => (index === flagshipProjects.length - 1 ? 0 : index + 1));
+  const previous = () =>
+    setActive((index) => (index === 0 ? visibleFlagshipProjects.length - 1 : index - 1));
+  const next = () =>
+    setActive((index) => (index === visibleFlagshipProjects.length - 1 ? 0 : index + 1));
 
   return (
     <section id="projects" className="relative overflow-hidden bg-white px-5 py-24 dark:bg-slate-950">
@@ -1034,9 +1064,18 @@ function ProjectsSection() {
           icon={Rocket}
         />
 
+        <ProjectFilterBar active={projectFilter} onChange={setProjectFilter} counts={projectCounts} />
+
+        {visibleFlagshipProjects.length === 0 && (
+          <div className="mb-8 rounded-[2rem] border border-dashed border-slate-300 bg-white/70 p-8 text-center font-bold text-slate-500 dark:border-white/10 dark:bg-white/5 dark:text-slate-400">
+            Aucun projet dans cette catégorie pour le moment.
+          </div>
+        )}
+
+        {visibleFlagshipProjects.length > 0 && (
         <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
           <div className="grid gap-5">
-            {flagshipProjects.map((project, index) => {
+            {visibleFlagshipProjects.map((project, index) => {
               const Icon = project.icon;
               const isActive = active === index;
 
@@ -1150,6 +1189,7 @@ function ProjectsSection() {
             </motion.article>
           </AnimatePresence>
         </div>
+        )}
       </div>
 
       <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
@@ -1655,6 +1695,486 @@ function ContactSection() {
 }
 
 
+
+
+
+function MagicParticlesBackground() {
+  const particles = useMemo(
+    () =>
+      Array.from({ length: 26 }, (_, index) => ({
+        id: index,
+        left: (index * 37) % 100,
+        top: (index * 53) % 100,
+        size: 6 + (index % 5) * 3,
+        duration: 7 + (index % 6),
+        delay: (index % 8) * 0.35,
+      })),
+    []
+  );
+
+  return (
+    <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-[1] overflow-hidden">
+      {particles.map((particle) => (
+        <motion.span
+          key={particle.id}
+          className="absolute rounded-full bg-blue-400/20 blur-[1px] dark:bg-cyan-300/20"
+          style={{
+            left: `${particle.left}%`,
+            top: `${particle.top}%`,
+            width: particle.size,
+            height: particle.size,
+          }}
+          animate={{
+            y: [-18, 18, -18],
+            x: [-10, 10, -10],
+            opacity: [0.08, 0.38, 0.08],
+            scale: [0.8, 1.35, 0.8],
+          }}
+          transition={{
+            duration: particle.duration,
+            delay: particle.delay,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+function CursorGlowTrail() {
+  const [dots, setDots] = useState([]);
+
+  useEffect(() => {
+    let dotId = 0;
+
+    const onMove = (event) => {
+      const id = dotId++;
+      const dot = {
+        id,
+        x: event.clientX,
+        y: event.clientY,
+      };
+
+      setDots((current) => [...current.slice(-10), dot]);
+      window.setTimeout(() => {
+        setDots((current) => current.filter((item) => item.id !== id));
+      }, 650);
+    };
+
+    window.addEventListener("mousemove", onMove, { passive: true });
+    return () => window.removeEventListener("mousemove", onMove);
+  }, []);
+
+  return (
+    <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-[155] hidden sm:block">
+      <AnimatePresence>
+        {dots.map((dot) => (
+          <motion.span
+            key={dot.id}
+            initial={{ opacity: 0.55, scale: 0.35 }}
+            animate={{ opacity: 0, scale: 1.8 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.65, ease: "easeOut" }}
+            className="absolute h-4 w-4 rounded-full bg-cyan-300/50 blur-[2px]"
+            style={{
+              left: dot.x - 8,
+              top: dot.y - 8,
+            }}
+          />
+        ))}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+function MagicHeroHalo() {
+  return (
+    <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden rounded-[3rem]">
+      <motion.div
+        className="absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-300/20 blur-3xl"
+        animate={{
+          scale: [1, 1.25, 1],
+          opacity: [0.25, 0.45, 0.25],
+        }}
+        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute -right-20 top-8 h-64 w-64 rounded-full bg-fuchsia-400/20 blur-3xl"
+        animate={{
+          y: [-12, 18, -12],
+          x: [0, -14, 0],
+          opacity: [0.2, 0.38, 0.2],
+        }}
+        transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute -bottom-20 left-10 h-64 w-64 rounded-full bg-blue-500/20 blur-3xl"
+        animate={{
+          y: [10, -16, 10],
+          x: [-8, 8, -8],
+          opacity: [0.18, 0.34, 0.18],
+        }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      />
+    </div>
+  );
+}
+
+function MagicDivider() {
+  return (
+    <div aria-hidden="true" className="px-5">
+      <div className="mx-auto max-w-7xl">
+        <motion.div
+          className="h-px rounded-full bg-gradient-to-r from-transparent via-blue-400/50 to-transparent dark:via-cyan-300/40"
+          initial={{ scaleX: 0, opacity: 0 }}
+          whileInView={{ scaleX: 1, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        />
+      </div>
+    </div>
+  );
+}
+
+function SpotlightBackground() {
+  const [position, setPosition] = useState({ x: 50, y: 20 });
+
+  useEffect(() => {
+    const handleMove = (event) => {
+      setPosition({
+        x: (event.clientX / window.innerWidth) * 100,
+        y: (event.clientY / window.innerHeight) * 100,
+      });
+    };
+
+    window.addEventListener("mousemove", handleMove, { passive: true });
+    return () => window.removeEventListener("mousemove", handleMove);
+  }, []);
+
+  return (
+    <div
+      aria-hidden="true"
+      className="pointer-events-none fixed inset-0 z-0 opacity-70 dark:opacity-60"
+      style={{
+        background: `radial-gradient(circle at ${position.x}% ${position.y}%, rgba(59,130,246,0.16), transparent 28rem)`,
+      }}
+    />
+  );
+}
+
+function TypingHeroLine() {
+  const words = ["Support IT N1/N2", "Helpdesk", "ITSM", "Applications métiers"];
+  const [wordIndex, setWordIndex] = useState(0);
+  const [letters, setLetters] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    const current = words[wordIndex];
+    const delay = deleting ? 55 : 95;
+
+    const timer = window.setTimeout(() => {
+      if (!deleting && letters < current.length) {
+        setLetters((value) => value + 1);
+      } else if (!deleting && letters === current.length) {
+        window.setTimeout(() => setDeleting(true), 900);
+      } else if (deleting && letters > 0) {
+        setLetters((value) => value - 1);
+      } else if (deleting && letters === 0) {
+        setDeleting(false);
+        setWordIndex((value) => (value + 1) % words.length);
+      }
+    }, delay);
+
+    return () => window.clearTimeout(timer);
+  }, [letters, deleting, wordIndex]);
+
+  return (
+    <div className="mt-5 inline-flex items-center gap-3 rounded-full border border-blue-100 bg-white/80 px-5 py-3 text-sm font-black text-blue-800 shadow-xl shadow-blue-100 backdrop-blur dark:border-white/10 dark:bg-white/10 dark:text-cyan-200 dark:shadow-none">
+      <TerminalSquare className="h-4 w-4" />
+      <span>{words[wordIndex].slice(0, letters)}</span>
+      <motion.span
+        animate={{ opacity: [0, 1, 0] }}
+        transition={{ duration: 0.9, repeat: Infinity }}
+        className="h-4 w-0.5 bg-blue-700 dark:bg-cyan-200"
+      />
+    </div>
+  );
+}
+
+function AnimatedCounter({ value, suffix = "" }) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let frame = 0;
+    const totalFrames = 45;
+    const start = performance.now();
+
+    const animate = () => {
+      frame += 1;
+      const progress = Math.min(frame / totalFrames, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.round(value * eased));
+
+      if (performance.now() - start < 1400 && progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        setCount(value);
+      }
+    };
+
+    requestAnimationFrame(animate);
+  }, [value]);
+
+  return (
+    <span>
+      {count}
+      {suffix}
+    </span>
+  );
+}
+
+function PortfolioStatsStrip() {
+  const stats = [
+    { value: 6, suffix: "", label: "projets documentés", icon: Rocket },
+    { value: 2, suffix: "", label: "projets principaux", icon: Layers3 },
+    { value: 10, suffix: "+", label: "outils & environnements", icon: Wrench },
+    { value: 100, suffix: "%", label: "orienté support", icon: Headphones },
+  ];
+
+  return (
+    <section className="px-5 py-10">
+      <div className="mx-auto grid max-w-7xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {stats.map((stat, index) => {
+          const Icon = stat.icon;
+          return (
+            <motion.article
+              key={stat.label}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.06, duration: 0.45, ease: "easeOut" }}
+              whileHover={{ y: -8, scale: 1.025 }}
+              className="rounded-[2rem] border border-slate-200 bg-white/80 p-6 text-center shadow-xl shadow-slate-100 backdrop-blur transition dark:border-white/10 dark:bg-white/5 dark:shadow-black/20"
+            >
+              <div className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-blue-50 text-blue-700 ring-1 ring-blue-100 dark:bg-cyan-400/10 dark:text-cyan-200 dark:ring-cyan-300/20">
+                <Icon className="h-6 w-6" />
+              </div>
+              <p className="mt-4 text-4xl font-black text-slate-950 dark:text-white">
+                <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+              </p>
+              <p className="mt-2 text-sm font-black uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                {stat.label}
+              </p>
+            </motion.article>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+function ProjectFilterBar({ active, onChange, counts }) {
+  const filters = [
+    { id: "all", label: "Tout", count: counts.all },
+    { id: "support", label: "Support / métier", count: counts.support },
+    { id: "web", label: "Web", count: counts.web },
+    { id: "desktop", label: "Desktop", count: counts.desktop },
+    { id: "database", label: "Base de données", count: counts.database },
+  ];
+
+  return (
+    <div className="mb-8 flex flex-wrap justify-center gap-3">
+      {filters.map((filter) => (
+        <button
+          key={filter.id}
+          onClick={() => onChange(filter.id)}
+          className={`inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-black transition duration-300 ease-out ${
+            active === filter.id
+              ? "bg-slate-950 text-white shadow-xl shadow-slate-200 dark:bg-white dark:text-slate-950 dark:shadow-none"
+              : "bg-white text-slate-700 ring-1 ring-slate-200 hover:-translate-y-0.5 hover:bg-blue-50 dark:bg-white/5 dark:text-slate-200 dark:ring-white/10 dark:hover:bg-white/10"
+          }`}
+        >
+          <Filter className="h-4 w-4" />
+          {filter.label}
+          <span className={`rounded-full px-2 py-0.5 text-xs ${active === filter.id ? "bg-white/20 dark:bg-slate-950/10" : "bg-slate-100 dark:bg-white/10"}`}>
+            {filter.count}
+          </span>
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function ScrollProgress() {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const updateProgress = () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - window.innerHeight;
+      const current = height > 0 ? (scrollTop / height) * 100 : 0;
+      setProgress(current);
+    };
+
+    updateProgress();
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    return () => window.removeEventListener("scroll", updateProgress);
+  }, []);
+
+  return (
+    <div className="fixed left-0 top-0 z-[160] h-1 w-full bg-transparent">
+      <motion.div
+        className="h-full rounded-r-full bg-gradient-to-r from-blue-600 via-cyan-400 to-fuchsia-500"
+        style={{ width: `${progress}%` }}
+      />
+    </div>
+  );
+}
+
+function BackToTopButton() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 650);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <AnimatePresence>
+      {visible && (
+        <motion.button
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          initial={{ opacity: 0, y: 20, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 20, scale: 0.9 }}
+          whileHover={{ y: -4 }}
+          className="fixed bottom-24 right-5 z-50 grid h-12 w-12 place-items-center rounded-full bg-slate-950 text-white shadow-2xl shadow-slate-300 ring-1 ring-white/10 transition dark:bg-white dark:text-slate-950 dark:shadow-black/30"
+          aria-label="Retour en haut"
+        >
+          <ArrowUp className="h-5 w-5" />
+        </motion.button>
+      )}
+    </AnimatePresence>
+  );
+}
+
+function SupportTerminalCard() {
+  const lines = [
+    "> analyse du ticket utilisateur...",
+    "> diagnostic poste / compte / application",
+    "> solution appliquée + suivi utilisateur",
+    "> documentation prête pour l’équipe",
+  ];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="overflow-hidden rounded-[2rem] border border-slate-200 bg-slate-950 shadow-2xl shadow-slate-200 dark:border-white/10 dark:shadow-black/30"
+    >
+      <div className="flex items-center gap-2 border-b border-white/10 px-5 py-4">
+        <span className="h-3 w-3 rounded-full bg-red-400" />
+        <span className="h-3 w-3 rounded-full bg-amber-400" />
+        <span className="h-3 w-3 rounded-full bg-emerald-400" />
+        <span className="ml-3 text-xs font-black uppercase tracking-wide text-slate-400">
+          support-it.sh
+        </span>
+      </div>
+
+      <div className="space-y-3 p-6 font-mono text-sm font-bold text-cyan-200">
+        {lines.map((line, index) => (
+          <motion.p
+            key={line}
+            initial={{ opacity: 0, x: -12 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.14, duration: 0.35 }}
+          >
+            {line}
+          </motion.p>
+        ))}
+        <motion.span
+          animate={{ opacity: [0, 1, 0] }}
+          transition={{ duration: 1, repeat: Infinity }}
+          className="inline-block h-5 w-2 bg-cyan-300 align-middle"
+        />
+      </div>
+    </motion.div>
+  );
+}
+
+function RecruiterValueSection() {
+  const values = [
+    {
+      title: "Support utilisateurs",
+      text: "Accueil, qualification, diagnostic et résolution d’incidents N1/N2 avec une communication claire.",
+      icon: Headphones,
+    },
+    {
+      title: "Applications métiers",
+      text: "Compréhension des outils internes, tests, remontées d’anomalies et accompagnement des utilisateurs.",
+      icon: MonitorCog,
+    },
+    {
+      title: "Documentation",
+      text: "Rédaction de procédures, capitalisation des solutions et amélioration continue du support.",
+      icon: ClipboardList,
+    },
+    {
+      title: "Culture projet",
+      text: "Capacité à concevoir, structurer et présenter des projets applicatifs avec base de données.",
+      icon: Database,
+    },
+  ];
+
+  return (
+    <section id="apport" className="px-5 py-20">
+      <div className="mx-auto max-w-7xl">
+        <SectionHeader
+          eyebrow="Ce que j’apporte"
+          title="Un profil support IT qui comprend aussi les applications"
+          subtitle="Cette section aide le recruteur à voir rapidement ta valeur en entreprise, au-delà de la liste d’outils."
+          icon={Sparkles}
+        />
+
+        <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="grid gap-5 sm:grid-cols-2">
+            {values.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <motion.article
+                  key={item.title}
+                  initial={{ opacity: 0, y: 22 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ delay: index * 0.06, duration: 0.45, ease: "easeOut" }}
+                  whileHover={{ y: -8, scale: 1.015 }}
+                  className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-xl shadow-slate-100 transition dark:border-white/10 dark:bg-white/5 dark:shadow-black/20"
+                >
+                  <div className="grid h-14 w-14 place-items-center rounded-2xl bg-blue-50 text-blue-700 ring-1 ring-blue-100 dark:bg-cyan-400/10 dark:text-cyan-200 dark:ring-cyan-300/20">
+                    <Icon className="h-7 w-7" />
+                  </div>
+                  <h3 className="mt-5 text-xl font-black text-slate-950 dark:text-white">{item.title}</h3>
+                  <p className="mt-3 text-sm font-semibold leading-7 text-slate-600 dark:text-slate-300">
+                    {item.text}
+                  </p>
+                </motion.article>
+              );
+            })}
+          </div>
+
+          <SupportTerminalCard />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function LoadingScreen() {
   return (
     <motion.div
@@ -1726,19 +2246,30 @@ export default function App() {
 
   return (
     <main className={`${theme === "dark" ? "dark" : ""} min-h-screen scroll-smooth bg-white font-sans text-slate-900 selection:bg-cyan-100 selection:text-blue-950`}>
-      <div className="min-h-screen bg-white transition-colors duration-300 dark:bg-slate-950">
+      <div className="relative min-h-screen overflow-x-hidden bg-white transition-colors duration-300 dark:bg-slate-950">
+        <SpotlightBackground />
+        <MagicParticlesBackground />
+        <CursorGlowTrail />
+        <ScrollProgress />
         <AnimatePresence>{showLoader && <LoadingScreen />}</AnimatePresence>
         <Navbar theme={theme} toggleTheme={toggleTheme} />
         <Hero theme={theme} toggleTheme={toggleTheme} />
+        <PortfolioStatsStrip />
+        <MagicDivider />
         <ValueSection />
+        <RecruiterValueSection />
+        <MagicDivider />
         <FutureSupportSection />
         <ProjectsSection />
+        <MagicDivider />
         <RealisationsSection />
         <ExperienceSection />
         <StackSection />
         <EducationStrip />
         <ContactSection />
         <Footer />
+
+        <BackToTopButton />
 
         <button onClick={toggleTheme} className="fixed bottom-5 left-5 z-40 hidden h-14 w-14 items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-900 shadow-2xl shadow-slate-200 transition duration-300 ease-out hover:-translate-y-1 dark:border-white/10 dark:bg-slate-900 dark:text-white dark:shadow-black/30 sm:inline-flex" aria-label="Changer le thème">
           {theme === "dark" ? <Sun className="h-6 w-6" /> : <Moon className="h-6 w-6" />}
