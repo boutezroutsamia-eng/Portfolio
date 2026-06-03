@@ -241,8 +241,8 @@ const projects = [
       "dotnet build",
       "dotnet run",
     ],
-    docsLabel: "Télécharger la documentation",
-    docsLink: "#",
+    docsLabel: "Télécharger la documentation PDF",
+    docsLink: "/docs/MyAppTodo.pdf",
     github: "https://github.com/samaholicc/TaskManagerFinal",
   },
   {
@@ -275,8 +275,8 @@ const projects = [
       "npm run build",
       "npm start",
     ],
-    docsLabel: "Télécharger la documentation",
-    docsLink: "#",
+    docsLabel: "Télécharger la documentation PDF",
+    docsLink: "/docs/JSreactVitrine.pdf",
     github: "#",
   },
   {
@@ -314,8 +314,8 @@ const projects = [
       "npm run build",
       "firebase deploy --only hosting",
     ],
-    docsLabel: "Télécharger la documentation",
-    docsLink: "#",
+    docsLabel: "Télécharger la documentation PDF",
+    docsLink: "/docs/ArtSphere.pdf",
     github: "#",
   },
   {
@@ -361,8 +361,8 @@ const projects = [
       "php artisan serve",
       "Ouvrir l’application sur http://localhost:8000",
     ],
-    docsLabel: "Télécharger la documentation",
-    docsLink: "#",
+    docsLabel: "Télécharger la documentation PDF",
+    docsLink: "/docs/TaskManager.pdf",
     github: "https://github.com/samaholicc/task_manager",
   },,
   {
@@ -399,8 +399,16 @@ const projects = [
       "Compiler la solution",
       "Lancer le projet SchoolManagement",
     ],
-    docsLabel: "Documentation du projet",
-    docsLink: "#",
+    docsLabel: "Télécharger la documentation PDF",
+    docsLink: "/docs/SchoolManagement.pdf",
+    database: {
+      name: "gestion_etudiants_db",
+      engine: "MySQL / MariaDB",
+      summary:
+        "Base relationnelle structurée autour des comptes, étudiants, enseignants, départements, matières, classes, inscriptions et résultats.",
+      tables: ["account", "dep", "subject", "teacher", "class", "studentstable", "student_classes", "results"],
+      iframeSrc: "https://dbdiagram.io/e/6a206f42d2fbd72c4d45faf4/6a206f575863c174347a784d",
+    },
     github: "#",
   },
   {
@@ -442,8 +450,31 @@ const projects = [
       "npm install",
       "npm run build",
     ],
-    docsLabel: "Documentation du projet",
-    docsLink: "#",
+    docsLabel: "Télécharger la documentation PDF",
+    docsLink: "/docs/Loc-Manager.pdf",
+    database: {
+      name: "app",
+      engine: "MySQL",
+      summary:
+        "Base de données immobilière multi-rôles pour gérer administrateurs, employés, propriétaires, locataires, logements, locations, maintenance, messages et notifications.",
+      tables: [
+        "block_admin",
+        "employee",
+        "owner",
+        "tenant",
+        "block",
+        "room",
+        "rental",
+        "parking_slots",
+        "maintenance_requests",
+        "activities",
+        "notifications",
+        "messages",
+        "system_alerts",
+        "stats_history",
+      ],
+      iframeSrc: "https://dbdiagram.io/e/6a20722d5863c174347a92a0/6a2072315863c174347a92f9",
+    },
     github: "#",
   }
 ];
@@ -1196,6 +1227,12 @@ function RealisationsSection() {
 }
 
 function ProjectModal({ project, onClose }) {
+  const [loadedDiagram, setLoadedDiagram] = useState(false);
+
+  useEffect(() => {
+    setLoadedDiagram(false);
+  }, [project?.title]);
+
   if (!project) return null;
   const ProjectIcon = project.icon;
 
@@ -1300,6 +1337,91 @@ function ProjectModal({ project, onClose }) {
                   ))}
                 </div>
               </section>
+
+              {project.database && (
+                <section className="rounded-[2rem] bg-white/5 p-6 ring-1 ring-white/10">
+                  <h3 className="text-center text-2xl font-black">Base de données & modélisation</h3>
+
+                  <div className="mt-6 grid gap-4 md:grid-cols-[0.8fr_1.2fr]">
+                    <div className="rounded-3xl bg-slate-950 p-5 ring-1 ring-white/10">
+                      <p className="text-xs font-black uppercase tracking-wide text-cyan-300">Base</p>
+                      <p className="mt-2 text-2xl font-black text-white">{project.database.name}</p>
+                      <p className="mt-1 text-sm font-bold text-slate-400">{project.database.engine}</p>
+                      <p className="mt-4 text-sm font-semibold leading-7 text-slate-300">
+                        {project.database.summary}
+                      </p>
+                    </div>
+
+                    <div className="rounded-3xl bg-white/5 p-5 ring-1 ring-white/10">
+                      <p className="mb-4 text-xs font-black uppercase tracking-wide text-cyan-300">Tables principales</p>
+                      <div className="flex flex-wrap gap-2">
+                        {project.database.tables.map((table) => (
+                          <span
+                            key={table}
+                            className="rounded-full bg-slate-950 px-4 py-2 text-xs font-black text-emerald-300 ring-1 ring-white/10"
+                          >
+                            {table}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {project.database.iframeSrc && (
+                    <div className="mt-6 overflow-hidden rounded-[1.5rem] bg-slate-950 ring-1 ring-white/10">
+                      <div className="flex flex-col gap-4 border-b border-white/10 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+                        <div>
+                          <p className="text-xs font-black uppercase tracking-wide text-cyan-300">Modélisation dbdiagram</p>
+                          <p className="text-sm font-bold text-slate-300">
+                            Le diagramme est chargé uniquement sur demande pour éviter de ralentir la modal.
+                          </p>
+                        </div>
+
+                        <div className="flex flex-wrap gap-2">
+                          <button
+                            onClick={() => setLoadedDiagram(true)}
+                            className="rounded-full bg-blue-600 px-4 py-2 text-xs font-black text-white transition hover:-translate-y-0.5 hover:bg-blue-500"
+                          >
+                            Charger le diagramme
+                          </button>
+                          <a
+                            href={project.database.iframeSrc}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="rounded-full bg-white/10 px-4 py-2 text-xs font-black text-white transition hover:-translate-y-0.5 hover:bg-white/20"
+                          >
+                            Ouvrir dans dbdiagram
+                          </a>
+                        </div>
+                      </div>
+
+                      {loadedDiagram ? (
+                        <iframe
+                          title={`Modélisation ${project.title}`}
+                          src={project.database.iframeSrc}
+                          width="100%"
+                          height="430"
+                          className="block w-full border-0 bg-white"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div className="grid min-h-[260px] place-items-center bg-slate-900 px-6 py-10 text-center">
+                          <div>
+                            <div className="mx-auto grid h-16 w-16 place-items-center rounded-3xl bg-cyan-400/10 text-cyan-300 ring-1 ring-cyan-300/20">
+                              <Database className="h-8 w-8" />
+                            </div>
+                            <h4 className="mt-5 text-2xl font-black text-white">Diagramme prêt à charger</h4>
+                            <p className="mx-auto mt-3 max-w-xl text-sm font-semibold leading-7 text-slate-400">
+                              L’intégration dbdiagram peut prendre quelques secondes. Clique sur “Charger le diagramme”
+                              ou ouvre-le dans un nouvel onglet pour une navigation plus fluide.
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </section>
+              )}
 
               <section>
                 <h3 className="text-center text-2xl font-black">Prérequis</h3>
