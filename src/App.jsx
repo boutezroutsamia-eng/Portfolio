@@ -724,14 +724,7 @@ function Hero({ theme, toggleTheme }) {
       <div className="relative mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
         <motion.div initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
           <div className="mb-6 flex flex-wrap gap-3">
-            <span className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-sm font-black text-emerald-700 ring-1 ring-emerald-100 dark:bg-emerald-400/10 dark:text-emerald-200 dark:ring-emerald-300/20">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-70" />
-                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
-              </span>
-              Disponible CDI
-            </span>
-            <span className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-black text-blue-800 ring-1 ring-blue-100 dark:bg-white/10 dark:text-cyan-200 dark:ring-white/10">
+<span className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-black text-blue-800 ring-1 ring-blue-100 dark:bg-white/10 dark:text-cyan-200 dark:ring-white/10">
               <MapPin className="h-4 w-4" /> {profile.location}
             </span>
           </div>
