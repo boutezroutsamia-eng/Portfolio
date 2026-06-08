@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { Analytics } from "@vercel/analytics/next"
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowRight,
