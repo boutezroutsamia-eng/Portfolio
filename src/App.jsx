@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/react"
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowRight,
@@ -2279,6 +2279,7 @@ export default function App() {
           <Mail className="h-6 w-6" />
         </a>
       </div>
+      <Analytics />
     </main>
   );
 }
